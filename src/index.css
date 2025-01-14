@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.playfair-display {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1, h2, h3 {
+	@apply font-playfair-display text-6xl font-semibold tracking-[-0.5px];
+}
+
+p {
+	@apply font-satoshi-regular text-xl font-normal tracking-wide leading-[1.8rem];
+}
