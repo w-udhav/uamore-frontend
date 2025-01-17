@@ -27,10 +27,8 @@ export default function Home() {
               Shop now and embrace the sweet smell of victory with Local Face.
             </p>
 
-            <div>
-              <button className="min-w-60 p-5 rounded-full bg-darkPlum hover:bg-charcoalBlack text-ivoryWhite font-satoshi-medium">
-                Shop Now
-              </button>
+            <div className="w-full flex justify-center">
+              <CTAButton type="light">Shop Now</CTAButton>
             </div>
           </div>
         </div>

@@ -7,9 +7,8 @@ export default function CTAButton({
   className = "",
   children,
 }) {
-  const types = ["light", "dark"];
   return (
-    <div className="w-full flex">
+    <div className="flex">
       <Link
         to="/"
         className={
@@ -18,8 +17,8 @@ export default function CTAButton({
           className +
           " " +
           (type === "light"
-            ? "bg-darkPlum text-ivoryWhite hover:bg-ivoryWhite hover:text-charcoalBlack"
-            : "bg-ivoryWhite text-darkPlum hover:bg-darkPlum hover:text-ivoryWhite")
+            ? "bg-richBurgundy text-ivoryWhite hover:bg-charcoalBlack"
+            : "bg-ivoryWhite text-richBurgundy hover:bg-richBurgundy hover:text-ivoryWhite")
         }
       >
         {children}

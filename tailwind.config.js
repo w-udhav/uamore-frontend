@@ -14,7 +14,6 @@ export default {
         //? Primary
         ivoryWhite: "#F8F5F2", //Clean, soft background
         charcoalBlack: "#1A1A1A", //Bold for text and contrast
-        darkPlum: "#3D1F2E",
         richBurgundy: "#4C1C24", //Luxurious accent
 
         //? Secondary
