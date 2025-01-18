@@ -13,26 +13,34 @@ const collectionImages = [
 const saleBgImage =
   "https://s3-alpha-sig.figma.com/img/180c/9ce1/700521424939141fe53023f283580e9f?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nVoMUYKkmuU-holEnBurS6Ov6qPLlF2Eg77cBQZWpDgQTboA-k7ZpQEb02ryUzQloTu5PxY~jlDZiyfiUZ2zVDJyIAy~kLHdVdexOPVdzHnHEU2t7WGwTtfoviT4D-~hLdBvptNQ6rpdLzvY2JvA9z1dM~ju1RrwjA6sagSo5WrJvfKlVyOQ19I2LsGXJZNxZCs154Qs9FDDs2xvZUwLqDF438yVdUf9w1Q9CkNJx~KfCgZi3s3HjHlznX4xnu77StfF~-uY2e9TkLvG2uZGxaU6zeBQ1QdjtrWfzr6rWUvoUhGenBrnRJ53Id0TYkPJhFhLbXPObsIyHTLyCaVggg__";
 
+const bgImage =
+  "https://i.pinimg.com/736x/f4/28/a8/f428a8f8fcda2f0f5247f43acf1dea16.jpg";
+
 export default function Home() {
   return (
     <div>
-      <MainLayout>
-        <div className="min-h-svh h-full w-full flex items-center justify-center text-center">
-          {/* Wrapper */}
-          <div className="flex flex-col gap-5">
-            <h1 className="">
-              Elevate Your Spirit with Victory Scented Fragrances!
-            </h1>
-            <p>
-              Shop now and embrace the sweet smell of victory with Local Face.
-            </p>
+      <div className="relative">
+        <div className="w-full h-full absolute top-0 left-0 opacity-30">
+          <img src={bgImage} className="w-full h-full object-cover" alt="" />
+        </div>
+        <div className="">
+          <div className="min-h-svh h-full w-full flex items-center justify-center text-center relative">
+            {/* Wrapper */}
+            <div className="flex flex-col gap-5 z-20 ">
+              <h1 className="">
+                Elevate Your Spirit with Victory Scented Fragrances!
+              </h1>
+              <p>
+                Shop now and embrace the sweet smell of victory with Local Face.
+              </p>
 
-            <div className="w-full flex justify-center">
-              <CTAButton type="light">Shop Now</CTAButton>
+              <div className="w-full flex justify-center">
+                <CTAButton type="light">Shop Now</CTAButton>
+              </div>
             </div>
           </div>
         </div>
-      </MainLayout>
+      </div>
 
       <MainLayout className="bg-charcoalBlack text-ivoryWhite">
         <div className="min-h-svh h-full w-full flex items-center justify-center text-center">
