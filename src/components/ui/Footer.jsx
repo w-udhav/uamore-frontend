@@ -5,6 +5,9 @@ import instagram from "../../assets/social icons/instagram.svg";
 import linkedin from "../../assets/social icons/linkedin.svg";
 import twitter from "../../assets/social icons/twitter.svg";
 import { Link } from "react-router-dom";
+import CTAButton from "./CTAButton";
+import logo_black from "../../assets/logos/logo_black.png";
+import Logo from "./Logo";
 
 const socialLinks = [
   {
@@ -53,45 +56,38 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <MainLayout className="py-40">
-      <div className="w-full grid grid-cols-3 gap-20 border-b-2 pb-20">
+    <MainLayout className="">
+      {/* Footer top */}
+      <div className="w-full grid grid-cols-3 gap-20 border-t pt-20">
         <div className="col-span-1 flex flex-col gap-8">
-          <p className="text-3xl font-satoshi-medium">
-            Subscribe to our Newsletter:
+          <p className="text-2xl font-playfair-display text-charcoalBlack/80">
+            Sign up for exclusivity
           </p>
 
           <div className="w-full flex flex-col gap-2">
-            <p className="text-lg">
+            <p className="text-sm text-zinc-500">
               Receive Updates on New Arrivals and Special Promotions!
             </p>
             <input
               type="text"
-              className="w-full bg-richBurgundy/10 border-2 border-dustyRose/50 outline-dustyRose rounded-md px-3 py-2 placeholder:text-dustyRose text-charcoalBlack"
+              className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your email address"
             />
-            <button className="w-full p-3 rounded-md bg-richBurgundy hover:bg-charcoalBlack text-ivoryWhite font-satoshi-medium">
-              Submit
-            </button>
-          </div>
-
-          {/* Social links */}
-          <div className="flex items-center gap-4">
-            {socialLinks.map((socialLink, index) => (
-              <a href={socialLink.link} key={index} target="_blank">
-                <img
-                  src={socialLink.icon}
-                  alt={socialLink.name}
-                  className="w-10"
-                />
-              </a>
-            ))}
+            <CTAButton
+              className="h-14 flex justify-center items-center"
+              type="light"
+            >
+              Subscribe
+            </CTAButton>
           </div>
         </div>
         {/* Section 2 */}
-        <div className="col-span-2 grid grid-cols-4 pl-10 pt-16">
+        <div className="col-span-2 grid grid-cols-4 pl-10">
           {footerLinks.map((item, index) => (
             <div key={index}>
-              <p className="text-lg font-satoshi-semibold">{item.title}</p>
+              <p className="text-2xl font-playfair-display text-charcoalBlack/80">
+                {item.title}
+              </p>
               <div className="flex flex-col gap-2 mt-5">
                 {item.links.map((link, index) => (
                   <Link key={index} to={link?.link} className="hover:underline">
@@ -103,11 +99,22 @@ export default function Footer() {
           ))}
         </div>
       </div>
-
-      <div className="mt-10">
-        <p className="text-center text-sm">
-          &copy; 2025 Uamore | All Rights Reserved | Privacy Policy | Terms and
-          Conditions
+      {/* Footer bottom */}
+      <div className="flex text-sm items-center justify-between mt-5">
+        {/* Social links */}
+        <div className="flex-1 flex items-center gap-4 text-sm">
+          <p className="text-sm text-zinc-500">Follow us:</p>
+          {socialLinks.map((socialLink, index) => (
+            <a href={socialLink.link} key={index} target="_blank">
+              {socialLink.name}
+            </a>
+          ))}
+        </div>
+        <div className="flex-1 flex flex-col items-center text-zinc-500">
+          <Logo type="black" />
+        </div>
+        <p className="text-right text-sm flex-1 text-zinc-500">
+          All Rights Reserved | Privacy Policy | Terms and Conditions
         </p>
       </div>
     </MainLayout>

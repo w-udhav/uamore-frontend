@@ -1,22 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-export default function InstagramPost({ data }) {
+const url =
+  "https://i.pinimg.com/736x/84/b5/ab/84b5abb68afd9ffcc6005a2c08d73fb4.jpg";
+
+export default function InstagramPost() {
   var settings = {
-    dots: true,
-    infinite: false,
+    dots: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 5,
+    slidesToScroll: 1,
     initialSlide: 0,
+    autoplay: true,
+    cssEase: "linear",
+    pauseOnHover: true,
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 4,
+          slidesToScroll: 1,
           infinite: true,
-          dots: true,
+          speed: 500,
+          dots: false,
         },
       },
       {
@@ -25,6 +36,7 @@ export default function InstagramPost({ data }) {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          infinite: true,
         },
       },
       {
@@ -32,29 +44,43 @@ export default function InstagramPost({ data }) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: true,
         },
       },
     ],
   };
+  // var settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 6,
+  //   slidesToScroll: 1,
+  // };
   return (
-    <Link
-      to="/"
-      className="relative w-full min-h-[28rem] max-h-[28rem] h-full overflow-hidden"
-    >
-      <img
-        // src="https://i.pinimg.com/736x/84/b5/ab/84b5abb68afd9ffcc6005a2c08d73fb4.jpg"
-        src={data}
-        alt=""
-        className="w-full h-full object-cover"
-      />
-      {/* Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full hover:opacity-100 opacity-0 flex justify-center items-center bg-black/40">
-        <div className="text-white text-center">
-          <Link to="/" className="max-w-max text-sm mt-5">
-            Watch
+    <div className="w-full">
+      <Slider {...settings}>
+        {[0, 1, 2, 3, 4, 5].map((item, index) => (
+          <Link
+            to="/"
+            key={index}
+            className="relative w-full min-h-[28rem] max-h-[28rem] h-full overflow-hidden"
+          >
+            <img
+              src={url}
+              alt=""
+              className="w-full min-h-[28rem] max-h-[28rem] h-full object-cover"
+            />
+            {/* Overlay */}
+            <div className="absolute top-0 left-0 right-0 w-full h-full hover:opacity-100 opacity-0 flex justify-center items-center bg-black/40">
+              <div className="text-white text-center">
+                <Link to="/" className="max-w-max text-sm mt-5">
+                  Watch
+                </Link>
+              </div>
+            </div>
           </Link>
-        </div>
-      </div>
-    </Link>
+        ))}
+      </Slider>
+    </div>
   );
 }

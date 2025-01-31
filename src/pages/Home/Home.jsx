@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MainLayout from "../../components/layout/MainLayout";
-import OurCollectionCard from "./components/OurCollectionCard";
 import CTAButton from "../../components/ui/CTAButton";
 import { home_hero_section } from "../../components/ui/imageURL";
 import perfume_sample from "../../assets/video/perfume-sample.mp4";
@@ -22,23 +21,6 @@ const saleBgImage =
   "https://s3-alpha-sig.figma.com/img/180c/9ce1/700521424939141fe53023f283580e9f?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nVoMUYKkmuU-holEnBurS6Ov6qPLlF2Eg77cBQZWpDgQTboA-k7ZpQEb02ryUzQloTu5PxY~jlDZiyfiUZ2zVDJyIAy~kLHdVdexOPVdzHnHEU2t7WGwTtfoviT4D-~hLdBvptNQ6rpdLzvY2JvA9z1dM~ju1RrwjA6sagSo5WrJvfKlVyOQ19I2LsGXJZNxZCs154Qs9FDDs2xvZUwLqDF438yVdUf9w1Q9CkNJx~KfCgZi3s3HjHlznX4xnu77StfF~-uY2e9TkLvG2uZGxaU6zeBQ1QdjtrWfzr6rWUvoUhGenBrnRJ53Id0TYkPJhFhLbXPObsIyHTLyCaVggg__";
 
 export default function Home() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % collectionImages.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-  };
   return (
     <div className="flex flex-col gap-32">
       <div className="relative max-h-[95svh] h-full bg-white -z-0 overflow-hidden">
@@ -102,22 +84,7 @@ export default function Home() {
             >
               Stay Inspired - find us on Instagram
             </CTAButton>
-            <div className="carousel-container">
-              <div
-                className="carousel"
-                style={{
-                  transform: `translateX(-${
-                    currentIndex * (100 / collectionImages.length)
-                  }%)`,
-                }}
-              >
-                {collectionImages
-                  .concat(collectionImages)
-                  .map((data, index) => (
-                    <InstagramPost key={index} data={data} />
-                  ))}
-              </div>
-            </div>
+            <InstagramPost />
           </div>
         </div>
       </MainLayout>

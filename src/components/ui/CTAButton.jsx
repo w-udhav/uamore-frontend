@@ -11,12 +11,12 @@ export default function CTAButton({
     <Link
       to="/"
       className={
-        "min-w-60 p-5  font-satoshi-medium text-center transition-all ease-in-out" +
+        "min-w-60 p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out" +
         " " +
         className +
         " " +
         (type === "light"
-          ? "bg-charcoalBlack text-white hover:bg-white hover:text-charcoalBlack"
+          ? "bg-charcoalBlack text-white hover:bg-black"
           : "bg-white text-charcoalBlack hover:bg-charcoalBlack hover:text-white")
       }
     >
