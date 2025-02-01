@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 
 export default function ProductDisplayCard({ data = {} }) {
   return (
-    <Link className="w-full max-w-md overflow-hidden flex flex-col gap-3">
-      <div className="h-[28rem] w-full relative">
+    <Link
+      to="/product/12"
+      className="w-full max-w-md overflow-hidden flex flex-col gap-3"
+    >
+      <div className="max-h-[26rem] h-full w-full relative">
         <img
           src={products_display}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain hover:scale-105 transition-transform"
           alt="perfume"
         />
       </div>

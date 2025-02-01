@@ -56,7 +56,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <MainLayout className="">
+    <MainLayout className="mt-28">
       {/* Footer top */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-20 border-t pt-20">
         <div className="col-span-1 flex flex-col gap-8 max-w-lg">

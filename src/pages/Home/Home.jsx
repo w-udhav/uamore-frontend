@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import MainLayout from "../../components/layout/MainLayout";
 import CTAButton from "../../components/ui/CTAButton";
 import { home_hero_section } from "../../components/ui/imageURL";
 import perfume_sample from "../../assets/video/perfume-sample.mp4";
-import { Link } from "react-router-dom";
 import InstagramPost from "./components/InstagramPost";
-
-const collectionImages = [
-  "https://i.pinimg.com/736x/17/4b/76/174b763274a5696909575c2a165cfa9f.jpg",
-  "https://i.pinimg.com/736x/5f/74/9f/5f749f794a61f04c579e225e48e46b80.jpg",
-  "https://i.pinimg.com/736x/8c/0f/e4/8c0fe43fc106f746feb8b375f20e569e.jpg",
-  "https://i.pinimg.com/736x/80/30/40/8030406692ac3153b8fd1d6ad05d71be.jpg",
-  "https://i.pinimg.com/736x/17/4b/76/174b763274a5696909575c2a165cfa9f.jpg",
-  "https://i.pinimg.com/736x/5f/74/9f/5f749f794a61f04c579e225e48e46b80.jpg",
-  "https://i.pinimg.com/736x/8c/0f/e4/8c0fe43fc106f746feb8b375f20e569e.jpg",
-  "https://i.pinimg.com/736x/80/30/40/8030406692ac3153b8fd1d6ad05d71be.jpg",
-];
-
-const saleBgImage =
-  "https://s3-alpha-sig.figma.com/img/180c/9ce1/700521424939141fe53023f283580e9f?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nVoMUYKkmuU-holEnBurS6Ov6qPLlF2Eg77cBQZWpDgQTboA-k7ZpQEb02ryUzQloTu5PxY~jlDZiyfiUZ2zVDJyIAy~kLHdVdexOPVdzHnHEU2t7WGwTtfoviT4D-~hLdBvptNQ6rpdLzvY2JvA9z1dM~ju1RrwjA6sagSo5WrJvfKlVyOQ19I2LsGXJZNxZCs154Qs9FDDs2xvZUwLqDF438yVdUf9w1Q9CkNJx~KfCgZi3s3HjHlznX4xnu77StfF~-uY2e9TkLvG2uZGxaU6zeBQ1QdjtrWfzr6rWUvoUhGenBrnRJ53Id0TYkPJhFhLbXPObsIyHTLyCaVggg__";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-32">
-      <div className="relative min-h-svh h-full bg-white -z-0 overflow-hidden border flex justify-center items-end">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col gap-32"
+    >
+      <div className="relative min-h-svh h-full bg-white -z-0 overflow-hidden flex justify-center items-end">
         <div className="w-full h-full absolute top-0 left-0 -z-10 flex justify-center items-center">
           <img
             src={home_hero_section}
@@ -38,7 +32,7 @@ export default function Home() {
               <p className="uppercase text-sm">gifts</p>
               <h3>Valentine's Day</h3>
               <Link
-                to="/"
+                to="/products"
                 className="max-w-max underline underline-offset-4 text-sm mt-5"
               >
                 Shop Now
@@ -49,11 +43,11 @@ export default function Home() {
         </MainLayout>
       </div>
 
-      <MainLayout className="md:px-4 px-0">
-        <div className="relative max-h-screen min-h-screen py-20 h-full w-full">
+      <div className="max-w-screen-2xl w-full mx-auto">
+        <div className="relative max-h-svh md:max-h-[85svh] min-h-svh md:min-h-[85svh] py-20 h-full w-full">
           <div className="absolute top-0 left-0 right-0 bottom-0">
             <video
-              className="object-cover w-full h-full"
+              className="w-full h-full object-cover "
               src={perfume_sample}
               autoPlay
               loop={true}
@@ -75,7 +69,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </MainLayout>
+      </div>
 
       <MainLayout>
         <div className="max-h-svh h-full w-full flex items-center justify-center text-center">
@@ -90,6 +84,6 @@ export default function Home() {
           </div>
         </div>
       </MainLayout>
-    </div>
+    </motion.div>
   );
 }
