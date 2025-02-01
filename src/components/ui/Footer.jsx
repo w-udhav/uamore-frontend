@@ -58,9 +58,9 @@ export default function Footer() {
   return (
     <MainLayout className="">
       {/* Footer top */}
-      <div className="w-full grid grid-cols-3 gap-20 border-t pt-20">
-        <div className="col-span-1 flex flex-col gap-8">
-          <p className="text-2xl font-playfair-display text-charcoalBlack/80">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-20 border-t pt-20">
+        <div className="col-span-1 flex flex-col gap-8 max-w-lg">
+          <p className="md:text-2xl font-playfair-display text-charcoalBlack/80">
             Sign up for exclusivity
           </p>
 
@@ -82,15 +82,19 @@ export default function Footer() {
           </div>
         </div>
         {/* Section 2 */}
-        <div className="col-span-2 grid grid-cols-4 pl-10">
+        <div className="col-span-2 grid-cols-1 grid md:grid-cols-4 lg:pl-10">
           {footerLinks.map((item, index) => (
-            <div key={index}>
-              <p className="text-2xl font-playfair-display text-charcoalBlack/80">
+            <div key={index} className="md:mb-0 mb-10">
+              <p className="md:text-2xl font-playfair-display text-charcoalBlack/80">
                 {item.title}
               </p>
               <div className="flex flex-col gap-2 mt-5">
                 {item.links.map((link, index) => (
-                  <Link key={index} to={link?.link} className="hover:underline">
+                  <Link
+                    key={index}
+                    to={link?.link}
+                    className="hover:underline text-zinc-500 text-sm"
+                  >
                     {link?.name}
                   </Link>
                 ))}
@@ -102,8 +106,8 @@ export default function Footer() {
       {/* Footer bottom */}
       <div className="flex text-sm items-center justify-between mt-5">
         {/* Social links */}
-        <div className="flex-1 flex items-center gap-4 text-sm">
-          <p className="text-sm text-zinc-500">Follow us:</p>
+        <div className="flex-1 flex flex-wrap items-center gap-4 text-sm">
+          <p className="text-sm text-zinc-500 w-max">Follow us:</p>
           {socialLinks.map((socialLink, index) => (
             <a href={socialLink.link} key={index} target="_blank">
               {socialLink.name}
@@ -113,7 +117,7 @@ export default function Footer() {
         <div className="flex-1 flex flex-col items-center text-zinc-500">
           <Logo type="black" />
         </div>
-        <p className="text-right text-sm flex-1 text-zinc-500">
+        <p className="text-right text-sm flex-1 text-zinc-500 flex-wrap">
           All Rights Reserved | Privacy Policy | Terms and Conditions
         </p>
       </div>

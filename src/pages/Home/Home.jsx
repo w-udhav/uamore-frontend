@@ -23,13 +23,15 @@ const saleBgImage =
 export default function Home() {
   return (
     <div className="flex flex-col gap-32">
-      <div className="relative max-h-[95svh] h-full bg-white -z-0 overflow-hidden">
-        <img
-          src={home_hero_section}
-          alt="image"
-          className="object-cover w-full h-full"
-        />
-        <MainLayout className="absolute top-0 left-0 pb-12 w-full h-full flex items-end text-center text-charcoalBlack">
+      <div className="relative min-h-svh h-full bg-white -z-0 overflow-hidden border flex justify-center items-end">
+        <div className="w-full h-full absolute top-0 left-0 -z-10 flex justify-center items-center">
+          <img
+            src={home_hero_section}
+            alt="image"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <MainLayout className="pb-12 w-full h-full text-center text-charcoalBlack">
           <div className="w-full flex justify-end gap-2">
             <div className="flex-1"></div>
             <div className="flex-1 flex flex-col justify-center items-center gap-2">
@@ -47,11 +49,11 @@ export default function Home() {
         </MainLayout>
       </div>
 
-      <MainLayout className="">
-        <div className="min-h-svh py-20 h-full w-full flex items-center justify-center">
-          <div className="relative">
+      <MainLayout className="md:px-4 px-0">
+        <div className="relative max-h-screen min-h-screen py-20 h-full w-full">
+          <div className="absolute top-0 left-0 right-0 bottom-0">
             <video
-              className="object-contain w-full h-full"
+              className="object-cover w-full h-full"
               src={perfume_sample}
               autoPlay
               loop={true}
@@ -59,24 +61,24 @@ export default function Home() {
               muted
               playsInline
             ></video>
-            <div className="absolute top-0 left-0 w-full h-full text-white flex justify-center items-center">
-              <div className="flex flex-col items-center gap-2">
-                <p className=" text-sm">Makeup</p>
-                <h3>Valentine's Day</h3>
-                <Link
-                  to="/"
-                  className="max-w-max underline underline-offset-4 text-sm mt-5"
-                >
-                  Shop Now
-                </Link>
-              </div>
+          </div>
+          <div className="absolute top-0 left-0 w-full h-full text-white flex justify-center items-center">
+            <div className="flex flex-col items-center gap-2">
+              <p className=" text-sm">Makeup</p>
+              <h3>Valentine's Day</h3>
+              <Link
+                to="/"
+                className="max-w-max underline underline-offset-4 text-sm mt-5"
+              >
+                Shop Now
+              </Link>
             </div>
           </div>
         </div>
       </MainLayout>
 
       <MainLayout>
-        <div className="min-h-svh h-full w-full flex items-center justify-center text-center">
+        <div className="max-h-svh h-full w-full flex items-center justify-center text-center">
           <div className="w-full flex flex-col items-center gap-28">
             <CTAButton
               className="font-medium tracking-widest uppercase"

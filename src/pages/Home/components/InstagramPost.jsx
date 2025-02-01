@@ -12,7 +12,7 @@ export default function InstagramPost() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
@@ -20,6 +20,16 @@ export default function InstagramPost() {
     pauseOnHover: true,
     adaptiveHeight: true,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          infinite: true,
+          speed: 500,
+          dots: false,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -31,10 +41,21 @@ export default function InstagramPost() {
         },
       },
       {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          infinite: true,
+          speed: 500,
+          dots: false,
+        },
+      },
+      {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
           initialSlide: 2,
           infinite: true,
         },
@@ -57,7 +78,7 @@ export default function InstagramPost() {
   //   slidesToScroll: 1,
   // };
   return (
-    <div className="w-full">
+    <div className="w-full max-w-screen-2xl px-3">
       <Slider {...settings}>
         {[0, 1, 2, 3, 4, 5].map((item, index) => (
           <Link
