@@ -1,5 +1,6 @@
 import React from "react";
 import { products_display } from "../ui/imageURL";
+import BOX from "../../assets/products/BOX.jpg";
 import { Link } from "react-router-dom";
 
 export default function ProductDisplayCard({ data = {} }) {
@@ -10,8 +11,8 @@ export default function ProductDisplayCard({ data = {} }) {
     >
       <div className="max-h-[26rem] h-full w-full relative">
         <img
-          src={products_display}
-          className="w-full h-full object-contain hover:scale-105 transition-transform"
+          src={BOX}
+          className="w-full h-full object-cover hover:scale-105 transition-transform"
           alt="perfume"
         />
       </div>

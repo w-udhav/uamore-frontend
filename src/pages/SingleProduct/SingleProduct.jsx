@@ -1,7 +1,16 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { single_product_display } from "../../components/ui/imageURL";
 import CTAButton from "../../components/ui/CTAButton";
 import Slider from "react-slick";
+import img1 from "../../assets/singleProduct/image1.jpg";
+import img2 from "../../assets/singleProduct/image2.jpg";
+import img3 from "../../assets/singleProduct/image3.jpg";
+import mainImg from "../../assets/singleProduct/main.jpg";
+
+import { product } from "../../data/data";
+
+import { useCart } from "../../contexts/CartContext";
 
 const tabs = ["description", "ingredients", "how to use"];
 
@@ -10,6 +19,8 @@ export default function SingleProduct() {
   const [selectedTab, setSelectedTab] = useState("description");
   const [selectedTabContent, setSelectedTabContent] = useState("");
   const { main, image1, image2, image3 } = single_product_display;
+
+  const { addItemToCart } = useCart();
 
   const handleTabSelection = (tab) => {
     if (tab === selectedTab) return;
@@ -26,19 +37,27 @@ export default function SingleProduct() {
     autoplaySpeed: 3000,
   };
 
+  const productImages = [img1, img2, img3, mainImg];
+
   return (
-    <div className="w-full h-full grid grid-cols-1 lg:grid-cols-10">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full h-full grid grid-cols-1 lg:grid-cols-10"
+    >
       <div className="col-span-6 ">
         <div className="hidden lg:grid grid-cols-2 gap-1">
-          <img src={main} className="col-span-2" alt="" />
-          <img src={image1} alt="" />
-          <img src={image2} alt="" />
-          <img src={image3} alt="" />
+          <img src={img1} className="col-span-2" alt="" />
+          <img src={img2} alt="" />
+          <img src={img3} alt="" />
+          <img src={mainImg} alt="" />
         </div>
 
         <div className="lg:hidden max-w-screen-xl w-full h-[70vh] md:h-svh overflow-hidden ">
           <Slider {...sliderSettings}>
-            {[main, image1, image2, image3].map((image, index) => (
+            {productImages.map((image, index) => (
               <div
                 className="w-full md:max-h-[95svh] md:min-h-[95svh] max-h-[65vh] min-h-[65vh] h-full overflow-hidden relative"
                 key={index}
@@ -60,9 +79,9 @@ export default function SingleProduct() {
           <div className="w-full flex flex-col items-start md:items-center md:text-center gap-16">
             {/* Header */}
             <div className="flex flex-col gap-5">
-              <h3 className="">Dioriviera - Limited Edition</h3>
+              <h3 className="">{product.title}</h3>
               <p className="text-charcoalBlack/60 text-sm font-satoshi-medium">
-                Eau de Parfum - Fruity and Floral Notes
+                {product.subtitle}
               </p>
             </div>
             {/* Size */}
@@ -72,16 +91,20 @@ export default function SingleProduct() {
               </p>
               <div className="flex gap-2">
                 <button
-                  className={`max-w-32 rounded-md px-3 py-2 border border-charcoalBlack/50 text-sm font-satoshi-bold text-charcoalBlack/80 ${
-                    selectedSize === "125 mL" ? "border-charcoalBlack" : ""
+                  className={`max-w-32 rounded-md px-3 py-2 border  text-sm font-satoshi-bold text-charcoalBlack/80 ${
+                    selectedSize === "125 mL"
+                      ? "border-charcoalBlack/60 bg-charcoalBlack/10"
+                      : "border-charcoalBlack/50"
                   }`}
                   onClick={() => setSelectedSize("125 mL")}
                 >
                   125 mL
                 </button>
                 <button
-                  className={`max-w-32 rounded-md px-3 py-2 border border-charcoalBlack/50 text-sm font-satoshi-bold text-charcoalBlack/80 ${
-                    selectedSize === "250 mL" ? "border-charcoalBlack" : ""
+                  className={`max-w-32 rounded-md px-3 py-2 border text-sm font-satoshi-bold text-charcoalBlack/80 ${
+                    selectedSize === "250 mL"
+                      ? "border-charcoalBlack/60 bg-charcoalBlack/10"
+                      : "border-charcoalBlack/50"
                   }`}
                   onClick={() => setSelectedSize("250 mL")}
                 >
@@ -112,21 +135,17 @@ export default function SingleProduct() {
               <div className="">
                 <p className="text-left text-lg">
                   {selectedTabContent && selectedTabContent}
-                  For this limited edition, Dioriviera is nestled in a case
-                  adorned with the Dioriviera 2024 collection's emerald green
-                  Toile de Jouy motif. A nod to the eau de parfum's solar and
-                  festive personality, an invitation to an enchanting summer
-                  escape.
+                  {selectedTab === "description" && product.about.desc}
                 </p>
               </div>
             </div>
             {/* Buy */}
-            <CTAButton type="light" className="w-full">
+            <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
               Add to Bag
-            </CTAButton>
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

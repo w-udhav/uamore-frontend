@@ -39,7 +39,7 @@ const footerLinks = [
   },
   {
     title: "Shopping",
-    links: [],
+    links: [{ name: "Perfumes", link: "/products" }],
   },
   {
     title: "Customer Care",

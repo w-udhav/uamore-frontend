@@ -48,3 +48,9 @@ p {
 .carousel > * {
   box-sizing: border-box;
 }
+
+.custom-bg {
+  background: url("./assets/sample.png") no-repeat;
+  background-position: 50% 100%;
+  background-size: cover;
+}

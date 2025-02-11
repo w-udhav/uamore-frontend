@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import MainLayout from "../layout/MainLayout";
 import Logo from "./Logo";
 import bag from "../../assets/svg/bag.svg";
+import bag_white from "../../assets/svg/bag_white.svg";
 import person from "../../assets/svg/person.svg";
 import menu from "../../assets/svg/menu.svg";
+import menu_white from "../../assets/svg/menu_white.svg";
 import close from "../../assets/svg/close.svg";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -55,39 +57,69 @@ export default function Navbar() {
     } else if (scrollDirection === "down") {
       return "opacity-0 delay-500";
     } else {
-      return "opacity-100 bg-white delay-500 shadow-sm";
+      return (
+        "opacity-100 bg-white/80 delay-500 shadow-sm " +
+        (location.pathname === "/" && "text-charcoalBlack")
+      );
     }
   };
 
   return (
     <MainLayout
       style={{ transition: "all 0.5s ease, opacity 0.5s ease" }}
-      className={`z-50 text-charcoalBlack fixed top-0 left-0 h-max ${getBackgroundStyle()}`}
+      className={`z-50 fixed top-0 left-0 h-max ${getBackgroundStyle()}`}
     >
-      <div className="w-full flex items-center">
-        <div className="flex-1">
-          <Link
-            to="/products"
-            className="max-w-max underline underline-offset-4 text-sm"
-          >
-            Explore More
-          </Link>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <Logo type="black" width="w-20 md:w-24" />
-        </div>
-        <div className="flex-1 flex gap-3 justify-end items-center">
-          <button>
+      {location.pathname === "/" && scrollY === 0 ? (
+        <div className="w-full flex items-center text-white">
+          <div className="flex-1">
+            <Link
+              to="/products"
+              className="max-w-max underline underline-offset-4 text-sm"
+            >
+              Explore More
+            </Link>
+          </div>
+          <div className="flex-1 flex justify-center">
+            <Logo type="light" width="w-20 md:w-24" />
+          </div>
+          <div className="flex-1 flex gap-3 justify-end items-center">
+            {/* <button>
             <img src={person} className="w-8" alt="bag" />
-          </button>
-          <button>
-            <img src={bag} className="w-7 " alt="bag" />
-          </button>
-          <button onClick={handleHamburger}>
-            <img src={menu} className="w-7 " alt="bag" />
-          </button>
+          </button> */}
+            <button>
+              <img src={bag_white} className="w-7 text-white" alt="bag" />
+            </button>
+            <button onClick={handleHamburger}>
+              <img src={menu_white} className="w-7 " alt="bag" />
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="w-full flex items-center text-charcoalBlack">
+          <div className="flex-1">
+            <Link
+              to="/products"
+              className="max-w-max underline underline-offset-4 text-sm"
+            >
+              Explore More
+            </Link>
+          </div>
+          <div className="flex-1 flex justify-center">
+            <Logo type="black" width="w-20 md:w-24" />
+          </div>
+          <div className="flex-1 flex gap-3 justify-end items-center">
+            {/* <button>
+            <img src={person} className="w-8" alt="bag" />
+          </button> */}
+            <button>
+              <img src={bag} className="w-7 " alt="bag" />
+            </button>
+            <button onClick={handleHamburger}>
+              <img src={menu} className="w-7 " alt="bag" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Hamburger menu */}
       <AnimatePresence>
@@ -117,19 +149,19 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex flex-col gap-5 font-medium">
-                  <Link to="/" className="">
+                  {/* <Link to="/" className="">
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
                       Home
                     </p>
-                  </Link>
+                  </Link> */}
                   <Link to="/products" className="">
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
-                      Shop
+                      Shop Perfumes
                     </p>
                   </Link>
-                  <Link to="/about" className="">
+                  <Link to="/about-us" className="">
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
-                      About
+                      Know About Us
                     </p>
                   </Link>
                   <div className="flex flex-col gap-2">

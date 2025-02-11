@@ -5,6 +5,7 @@ import Footer from "./components/ui/Footer";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Products from "./pages/Products/Products";
 import { useState } from "react";
+import AboutUs from "./pages/AboutUs";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<SingleProduct />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
