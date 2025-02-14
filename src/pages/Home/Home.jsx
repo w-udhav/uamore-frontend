@@ -70,8 +70,14 @@ export default function Home() {
 
           <div className="absolute top-0 left-0 w-full h-full text-white flex justify-center items-center">
             <div className="flex flex-col items-center gap-2 relative md:p-20 z-10">
-              <p className="">Makeup</p>
-              <h3 className="text-5xl font-thin">Valentine's Day</h3>
+              {/* <p className="">Makeup</p> */}
+              <p className="text-center max-w-xl">
+                Enter the realm of Uamore—where every fragrance is a work of
+                art, every note a breath of refinement, and every bottle a
+                signature of eternity waiting to be yours. Surrender to
+                opulence, redefine yourself.
+              </p>
+              {/* <h3 className="text-5xl font-thin">Valentine's Day</h3> */}
               <Link
                 to="/"
                 className="max-w-max underline underline-offset-4 text-sm mt-5"

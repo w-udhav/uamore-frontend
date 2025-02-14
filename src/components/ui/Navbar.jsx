@@ -90,9 +90,9 @@ export default function Navbar() {
             <Link to={isLoggedIn ? "/account/user" : "/login"}>
               <img src={person_white} className="w-8" alt="bag" />
             </Link>
-            <button>
+            <Link to="/cart">
               <img src={bag_white} className="w-7 text-white" alt="bag" />
-            </button>
+            </Link>
             <button onClick={handleHamburger}>
               <img src={menu_white} className="w-7 " alt="bag" />
             </button>
@@ -115,9 +115,9 @@ export default function Navbar() {
             <Link to={isLoggedIn ? "/account/user" : "/login"}>
               <img src={person} className="w-8" alt="bag" />
             </Link>
-            <button>
+            <Link to="/cart">
               <img src={bag} className="w-7 " alt="bag" />
-            </button>
+            </Link>
             <button onClick={handleHamburger}>
               <img src={menu} className="w-7 " alt="bag" />
             </button>

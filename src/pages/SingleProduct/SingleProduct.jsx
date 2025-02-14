@@ -112,6 +112,11 @@ export default function SingleProduct() {
                 </button>
               </div>
             </div>
+
+            {/* Buy */}
+            <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
+              Add to Bag
+            </button>
             {/* Extra */}
             <div className="flex flex-col gap-5 w-full">
               {/* Tabs */}
@@ -134,15 +139,72 @@ export default function SingleProduct() {
               {/* Content Area */}
               <div className="">
                 <p className="text-left text-lg">
-                  {selectedTabContent && selectedTabContent}
-                  {selectedTab === "description" && product.about.desc}
+                  {selectedTab === "description" && (
+                    <div>
+                      <article>
+                        Uamore fragrances embody the highest standards of
+                        luxury:
+                      </article>
+                      <article>
+                        <b>Premium Ingredients </b>- Sourced from the finest
+                        global origins.
+                      </article>
+                      <article>
+                        <b>Chemical-Free Formula </b>- Pure, refined, and
+                        meticulously crafted.
+                      </article>
+                      <article>
+                        <b>Dermatologically Tested </b>- Gentle yet long-lasting
+                        on the skin.
+                      </article>
+                      <article>
+                        <b>Hypoallergenic & Cruelty-Free </b>- Ethical luxury
+                        without compromise.
+                      </article>
+                      <article>
+                        <b>FDA Approved & Non-Toxic </b>- Safe, skin-friendly
+                        indulgence.
+                      </article>
+                      <article>
+                        <b>Non-Greasy, Non-Sticky </b>- A luxurious feel with an
+                        immaculate finish.
+                      </article>
+                      <article>
+                        <b>Handcrafted Excellence </b>- Every fragrance, an art
+                        form.
+                      </article>
+                    </div>
+                  )}
+
+                  {selectedTab === "ingredients" && <div></div>}
+                  {selectedTab === "how to use" && (
+                    <div className="flex flex-col gap-3 leading-snug">
+                      <article>
+                        To enhance the longevity and sillage of your Uamore
+                        fragrance:
+                      </article>
+                      <article>
+                        Apply on Pulse Points – Lightly spray on your wrists,
+                        neck, and behind your ears for the best diffusion.
+                      </article>
+                      <article>
+                        Layer for Depth – Mist it onto your clothing and hair
+                        for a more enduring scent.
+                      </article>
+                      <article>
+                        Avoid Rubbing – Allow the fragrance to settle naturally
+                        on your skin to keep its original composition intact.
+                      </article>
+                      <article>
+                        Store with Care – Keep your fragrance in a cool, dry
+                        area, away from direct sunlight, to maintain its
+                        essence.
+                      </article>
+                    </div>
+                  )}
                 </p>
               </div>
             </div>
-            {/* Buy */}
-            <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
-              Add to Bag
-            </button>
           </div>
         </div>
       </div>

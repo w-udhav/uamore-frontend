@@ -47,7 +47,7 @@ export default function Account() {
             subtitle="Manage your account settings right from here"
           />
           <div className="flex justify-center items-center h-96">
-            <h1 className="text-3xl font-satoshi-medium">
+            <h1 className="text-3xl font-satoshi-regular">
               You need to login to view this page
             </h1>
           </div>
