@@ -35,7 +35,7 @@ const socialLinks = [
 const footerLinks = [
   {
     title: "Categories",
-    links: [],
+    links: [{ name: "Men", link: "/products" }],
   },
   {
     title: "Shopping",
@@ -43,13 +43,13 @@ const footerLinks = [
   },
   {
     title: "Customer Care",
-    links: [],
+    links: [{ name: "Address", link: "/address" }],
   },
   {
     title: "Site Map",
     links: [
       { name: "Home", link: "/" },
-      { name: "About Us", link: "/about" },
+      { name: "About Us", link: "/about-us" },
     ],
   },
 ];

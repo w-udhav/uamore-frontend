@@ -8,9 +8,8 @@ export default function AboutUs() {
         {/* Description */}
         <div className="w-full flex flex-col gap-2 items-center border-b py-8">
           <h3 className="text-5xl font-playfair-display font-thin">UAmore</h3>
-          <span className="text-center max-w-lg text-charcoalBlack/80">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <span className="text-center max-w-lg text-charcoalBlack/80 italic">
+            "Redefining Luxury, One Timeless Scent at a Time"
           </span>
         </div>
 

@@ -94,9 +94,7 @@ export default function InstagramPost() {
             {/* Overlay */}
             <div className="absolute top-0 left-0 right-0 w-full h-full hover:opacity-100 opacity-0 flex justify-center items-center bg-black/40">
               <div className="text-white text-center">
-                <Link to="/" className="max-w-max text-sm mt-5">
-                  Watch
-                </Link>
+                <p className="max-w-max text-sm mt-5">Watch</p>
               </div>
             </div>
           </Link>

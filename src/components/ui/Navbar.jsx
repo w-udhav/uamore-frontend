@@ -4,17 +4,21 @@ import Logo from "./Logo";
 import bag from "../../assets/svg/bag.svg";
 import bag_white from "../../assets/svg/bag_white.svg";
 import person from "../../assets/svg/person.svg";
+import person_white from "../../assets/svg/person_white.svg";
 import menu from "../../assets/svg/menu.svg";
 import menu_white from "../../assets/svg/menu_white.svg";
 import close from "../../assets/svg/close.svg";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Navbar() {
   const [scrollY, setScrollY] = useState(0);
   const [scrollDirection, setScrollDirection] = useState("up");
   const [showHamburger, setShowHamburger] = useState(false);
+
   const location = useLocation();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -83,9 +87,9 @@ export default function Navbar() {
             <Logo type="light" width="w-20 md:w-24" />
           </div>
           <div className="flex-1 flex gap-3 justify-end items-center">
-            {/* <button>
-            <img src={person} className="w-8" alt="bag" />
-          </button> */}
+            <Link to={isLoggedIn ? "/account/user" : "/login"}>
+              <img src={person_white} className="w-8" alt="bag" />
+            </Link>
             <button>
               <img src={bag_white} className="w-7 text-white" alt="bag" />
             </button>
@@ -108,9 +112,9 @@ export default function Navbar() {
             <Logo type="black" width="w-20 md:w-24" />
           </div>
           <div className="flex-1 flex gap-3 justify-end items-center">
-            {/* <button>
-            <img src={person} className="w-8" alt="bag" />
-          </button> */}
+            <Link to={isLoggedIn ? "/account/user" : "/login"}>
+              <img src={person} className="w-8" alt="bag" />
+            </Link>
             <button>
               <img src={bag} className="w-7 " alt="bag" />
             </button>
@@ -125,7 +129,9 @@ export default function Navbar() {
       <AnimatePresence>
         {showHamburger && (
           <div
-            onClick={handleHamburger}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
             className="fixed w-dvh h-dvh right-0 top-0 left-0 bottom-0 backdrop-blur-lg flex justify-end bg-black/40"
           >
             <motion.div
@@ -149,14 +155,14 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex flex-col gap-5 font-medium">
-                  {/* <Link to="/" className="">
-                    <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
-                      Home
-                    </p>
-                  </Link> */}
                   <Link to="/products" className="">
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
                       Shop Perfumes
+                    </p>
+                  </Link>
+                  <Link to="/blogs" className="">
+                    <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
+                      Scent Journal
                     </p>
                   </Link>
                   <Link to="/about-us" className="">

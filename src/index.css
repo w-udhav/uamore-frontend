@@ -29,6 +29,18 @@ p {
 	@apply font-satoshi-regular text-xl font-normal tracking-wide leading-[1.8rem];
 }
 
+
+.link {
+  color: rgb(76, 28, 36);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.link:hover {
+  color: rgb(26 26 26 / 0.5);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .collection-card-grid-template {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
