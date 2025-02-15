@@ -25,6 +25,13 @@ h3 {
   @apply text-4xl;
 }
 
+h5 {
+  @apply text-xl font-satoshi-bold;
+}
+h6 {
+  @apply text-lg font-satoshi-regular;
+}
+
 p {
 	@apply font-satoshi-regular text-xl font-normal tracking-wide leading-[1.8rem];
 }

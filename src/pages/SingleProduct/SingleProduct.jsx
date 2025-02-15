@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { single_product_display } from "../../components/ui/imageURL";
 import CTAButton from "../../components/ui/CTAButton";
@@ -11,20 +11,50 @@ import mainImg from "../../assets/singleProduct/main.jpg";
 import { product } from "../../data/data";
 
 import { useCart } from "../../contexts/CartContext";
+import Icon from "../../components/ui/Icon";
 
 const tabs = ["description", "ingredients", "how to use"];
 
-export default function SingleProduct() {
-  const [selectedSize, setSelectedSize] = useState("125 mL");
+export default function SingleProduct({ data = product }) {
+  // const [data, setData] = useState();
+  const [selectedSize, setSelectedSize] = useState("4 x 20mL");
   const [selectedTab, setSelectedTab] = useState("description");
   const [selectedTabContent, setSelectedTabContent] = useState("");
-  const { main, image1, image2, image3 } = single_product_display;
+  const [error, setError] = useState(null);
 
-  const { addItemToCart } = useCart();
+  const { main, image1, image2, image3 } = single_product_display;
+  const { cart, addItemToCart, updateCart } = useCart();
+
+  const cartItem = cart.find((item) => item.id === data.id);
+
+  const handleAddToCart = () => {
+    addItemToCart(data);
+  };
+
+  const handleIncrement = () => {
+    const totalQuantity = data?.quantity;
+    if (cartItem?.quantity === totalQuantity) {
+      setError("Maximum quantity reached");
+      return;
+    }
+    updateCart(data.id, 1);
+  };
+  const handleDecrement = () => {
+    updateCart(cartItem.id, -1);
+  };
+
+  useEffect(() => {
+    setTimeout(() => setError(null), 10000);
+  }, [error]);
 
   const handleTabSelection = (tab) => {
     if (tab === selectedTab) return;
     if (tabs.includes(tab)) setSelectedTab(tab);
+  };
+
+  const fetchProduct = async () => {
+    try {
+    } catch (error) {}
   };
 
   const sliderSettings = {
@@ -85,38 +115,58 @@ export default function SingleProduct() {
               </p>
             </div>
             {/* Size */}
-            <div className="flex flex-col gap-5 items-start md:items-center">
+            <div className="flex gap-5 items-start md:items-center">
               <p className="text-charcoalBlack/60 text-sm font-satoshi-medium">
-                This product exists in 2 sizes
+                Select option:
               </p>
               <div className="flex gap-2">
                 <button
                   className={`max-w-32 rounded-md px-3 py-2 border  text-sm font-satoshi-bold text-charcoalBlack/80 ${
-                    selectedSize === "125 mL"
+                    selectedSize === "4 x 20mL"
                       ? "border-charcoalBlack/60 bg-charcoalBlack/10"
                       : "border-charcoalBlack/50"
                   }`}
-                  onClick={() => setSelectedSize("125 mL")}
+                  onClick={() => setSelectedSize("4 x 20mL")}
                 >
-                  125 mL
-                </button>
-                <button
-                  className={`max-w-32 rounded-md px-3 py-2 border text-sm font-satoshi-bold text-charcoalBlack/80 ${
-                    selectedSize === "250 mL"
-                      ? "border-charcoalBlack/60 bg-charcoalBlack/10"
-                      : "border-charcoalBlack/50"
-                  }`}
-                  onClick={() => setSelectedSize("250 mL")}
-                >
-                  250 mL
+                  4 x 20mL
                 </button>
               </div>
             </div>
 
             {/* Buy */}
-            <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
+            {/* <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
               Add to Bag
-            </button>
+            </button> */}
+            <div className="w-full">
+              {cartItem ? (
+                <div className="flex items-center gap-4 border w-full ">
+                  <button
+                    onClick={handleDecrement}
+                    className="hover:bg-charcoalBlack hover:text-white flex items-center justify-center"
+                  >
+                    <Icon name="remove" className=" w-full text-xl  p-4 px-6" />
+                  </button>
+                  <div className="font-semibold flex-1 flex justify-center">
+                    {cartItem?.quantity}
+                  </div>
+                  <button
+                    onClick={handleIncrement}
+                    className="hover:bg-charcoalBlack hover:text-white flex items-center justify-center"
+                  >
+                    <Icon name="add" className="text-xl  p-4 px-6" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                >
+                  Add to Bag
+                </button>
+              )}
+              <p className="text-sm text-red-500">{error && error}</p>
+            </div>
+
             {/* Extra */}
             <div className="flex flex-col gap-5 w-full">
               {/* Tabs */}
@@ -138,71 +188,29 @@ export default function SingleProduct() {
               </div>
               {/* Content Area */}
               <div className="">
-                <p className="text-left text-lg">
+                <div className="text-left text-lg">
                   {selectedTab === "description" && (
-                    <div>
-                      <article>
-                        Uamore fragrances embody the highest standards of
-                        luxury:
-                      </article>
-                      <article>
-                        <b>Premium Ingredients </b>- Sourced from the finest
-                        global origins.
-                      </article>
-                      <article>
-                        <b>Chemical-Free Formula </b>- Pure, refined, and
-                        meticulously crafted.
-                      </article>
-                      <article>
-                        <b>Dermatologically Tested </b>- Gentle yet long-lasting
-                        on the skin.
-                      </article>
-                      <article>
-                        <b>Hypoallergenic & Cruelty-Free </b>- Ethical luxury
-                        without compromise.
-                      </article>
-                      <article>
-                        <b>FDA Approved & Non-Toxic </b>- Safe, skin-friendly
-                        indulgence.
-                      </article>
-                      <article>
-                        <b>Non-Greasy, Non-Sticky </b>- A luxurious feel with an
-                        immaculate finish.
-                      </article>
-                      <article>
-                        <b>Handcrafted Excellence </b>- Every fragrance, an art
-                        form.
-                      </article>
-                    </div>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: data?.about?.desc }}
+                    />
                   )}
 
-                  {selectedTab === "ingredients" && <div></div>}
-                  {selectedTab === "how to use" && (
-                    <div className="flex flex-col gap-3 leading-snug">
-                      <article>
-                        To enhance the longevity and sillage of your Uamore
-                        fragrance:
-                      </article>
-                      <article>
-                        Apply on Pulse Points – Lightly spray on your wrists,
-                        neck, and behind your ears for the best diffusion.
-                      </article>
-                      <article>
-                        Layer for Depth – Mist it onto your clothing and hair
-                        for a more enduring scent.
-                      </article>
-                      <article>
-                        Avoid Rubbing – Allow the fragrance to settle naturally
-                        on your skin to keep its original composition intact.
-                      </article>
-                      <article>
-                        Store with Care – Keep your fragrance in a cool, dry
-                        area, away from direct sunlight, to maintain its
-                        essence.
-                      </article>
-                    </div>
+                  {selectedTab === "ingredients" && (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: data?.about?.ingredients,
+                      }}
+                    />
                   )}
-                </p>
+                  {selectedTab === "how to use" && (
+                    <div
+                      className="flex flex-col gap-3 leading-snug"
+                      dangerouslySetInnerHTML={{
+                        __html: data?.about?.howToUse,
+                      }}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>

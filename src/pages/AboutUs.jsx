@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "../components/layout/MainLayout";
+import img1 from "../assets/sample2.png";
 
 export default function AboutUs() {
   return (
@@ -15,6 +16,9 @@ export default function AboutUs() {
 
         <div className="w-full flex justify-center mt-16 text-justify">
           <div className="max-w-5xl w-full flex flex-col gap-20 p-5 md:p-0">
+            <div>
+              <img src={img1} alt="" />
+            </div>
             <div>
               <p className="font-satoshi-regular text-4xl mb-2">About Us</p>
               <div className="flex flex-col gap-5">

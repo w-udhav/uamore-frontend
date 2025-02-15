@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { product } from "../data/data";
 const CartContext = createContext();
 
@@ -21,6 +27,15 @@ export function CartProvider({ children }) {
 
   const clearCart = () => {
     setCart([]);
+  };
+
+  const cartTotal = () => {
+    let total = 0;
+    if (cart.length > 0) {
+      cart.map((item) => (total += item?.quantity));
+    }
+
+    return total;
   };
 
   const updateCart = (id, quantity) => {
@@ -49,6 +64,7 @@ export function CartProvider({ children }) {
         updateCart,
         removeItemFromCart,
         clearCart,
+        cartTotal,
       }}
     >
       {children}

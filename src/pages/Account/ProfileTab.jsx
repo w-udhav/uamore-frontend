@@ -1,6 +1,8 @@
 import React from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function ProfileTab() {
+  const { user } = useAuth();
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-5 pb-20">
@@ -12,6 +14,7 @@ export default function ProfileTab() {
             <p className="text-sm">First Name</p>
             <input
               type="text"
+              value={user?.name}
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your first name"
             />
@@ -28,6 +31,7 @@ export default function ProfileTab() {
             <p className="text-sm">Email</p>
             <input
               type="text"
+              value={user?.email}
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your last name"
             />
@@ -36,6 +40,7 @@ export default function ProfileTab() {
             <p className="text-sm">Phone number</p>
             <input
               type="text"
+              value={user?.phone}
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your last name"
             />

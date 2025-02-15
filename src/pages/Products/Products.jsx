@@ -3,6 +3,7 @@ import MainLayout from "../../components/layout/MainLayout";
 import ProductDisplayCard from "../../components/layout/ProductDisplayCard";
 import { motion } from "framer-motion";
 import PageHeaders from "../../components/ui/PageHeaders";
+import { product } from "../../data/data";
 
 const title = "Perfumes";
 const subtitle =
@@ -25,7 +26,7 @@ export default function Products() {
             </div> */}
             <div className="col-span-full">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 lg:gap-14 gap-y-12">
-                <ProductDisplayCard />
+                <ProductDisplayCard data={product} />
               </div>
             </div>
           </div>

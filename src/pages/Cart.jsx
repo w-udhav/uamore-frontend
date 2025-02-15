@@ -4,16 +4,16 @@ import PageHeaders from "../components/ui/PageHeaders";
 import { motion } from "framer-motion";
 import { useCart } from "../contexts/CartContext";
 import CartCard from "../components/ui/CartCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { cart, updateCart, calculateCartValue, clearCart } = useCart();
+  const navigate = useNavigate();
 
   const [couponCode, setCouponCode] = useState("");
   const [couponDiscount, setCouponDiscount] = useState(0);
 
   const checkCouponValidity = async () => {};
-
-  const handleOrder = async () => {};
 
   return (
     <motion.div
@@ -83,7 +83,10 @@ export default function Cart() {
                     <span className="text-lg">₹{calculateCartValue}</span>
                   </div>
 
-                  <button className="w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
+                  <button
+                    onClick={() => navigate("/checkout")}
+                    className="w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                  >
                     Checkout
                   </button>
                 </div>

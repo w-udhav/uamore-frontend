@@ -51,7 +51,7 @@ export default function Login() {
         otp: formData.otp,
         phone: formData.phone.replace("+91", ""),
       });
-      login(res.data.user); // Log in user after OTP verification
+      login(res?.data?.user); // Log in user after OTP verification
     } catch (error) {
       setError(error?.response?.data?.message);
       console.error("Login Error:", error);

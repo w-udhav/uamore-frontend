@@ -12,6 +12,8 @@ import Account from "./pages/Account/Account";
 import Cart from "./pages/Cart";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
+import Checkout from "./pages/Checkout";
+import Success from "./pages/Success";
 
 export default function App() {
   return (
@@ -27,6 +29,8 @@ export default function App() {
         <Route path="/blogs/:id" element={<SingleBlog />} />
         <Route path="/account/*" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/success" element={<Success />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="*" element={<Navigate to="/" />} />

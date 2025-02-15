@@ -11,6 +11,7 @@ import close from "../../assets/svg/close.svg";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
 
 export default function Navbar() {
   const [scrollY, setScrollY] = useState(0);
@@ -19,6 +20,7 @@ export default function Navbar() {
 
   const location = useLocation();
   const { isLoggedIn } = useAuth();
+  const { cartTotal } = useCart();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -90,8 +92,13 @@ export default function Navbar() {
             <Link to={isLoggedIn ? "/account/user" : "/login"}>
               <img src={person_white} className="w-8" alt="bag" />
             </Link>
-            <Link to="/cart">
+            <Link to="/cart" className="relative">
               <img src={bag_white} className="w-7 text-white" alt="bag" />
+              {cartTotal() > 0 && (
+                <p className="text-sm bg-white text-charcoalBlack rounded-full w-6 h-6 flex justify-center items-center absolute -bottom-2 -right-2">
+                  {cartTotal()}
+                </p>
+              )}
             </Link>
             <button onClick={handleHamburger}>
               <img src={menu_white} className="w-7 " alt="bag" />
@@ -115,8 +122,13 @@ export default function Navbar() {
             <Link to={isLoggedIn ? "/account/user" : "/login"}>
               <img src={person} className="w-8" alt="bag" />
             </Link>
-            <Link to="/cart">
+            <Link to="/cart" className="relative">
               <img src={bag} className="w-7 " alt="bag" />
+              {cartTotal() > 0 && (
+                <p className="text-sm bg-black text-white rounded-full w-6 h-6 flex justify-center items-center absolute -bottom-2 -right-2">
+                  {cartTotal()}
+                </p>
+              )}
             </Link>
             <button onClick={handleHamburger}>
               <img src={menu} className="w-7 " alt="bag" />
