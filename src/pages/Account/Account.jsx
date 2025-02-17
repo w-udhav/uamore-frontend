@@ -10,7 +10,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 export default function Account() {
   const location = useLocation();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const tabs = [
     {
@@ -70,25 +70,35 @@ export default function Account() {
         />
         <div className="flex flex-col gap-5 w-full mt-10 max-w-screen-lg mx-auto">
           {/* Tabs */}
-          <div className="w-full flex justify-start gap-5 border-b">
-            {tabs.map((tab, index) => {
-              let isMatch = location.pathname.includes(tab.routeName);
-              return (
-                <Link
-                  key={index}
-                  to={tab.path}
-                  className={
-                    "text text-charcoalBlack capitalize pb-3 relative " +
-                    (isMatch ? "font-satoshi-medium" : "")
-                  }
-                >
-                  {tab.name}
-                  {isMatch && (
-                    <span className="absolute bottom-0 left-0 w-full border-b border-black" />
-                  )}
-                </Link>
-              );
-            })}
+          <div className="w-full flex justify-between items-center gap-5 border-b">
+            <div className="w-full flex justify-start gap-5">
+              {tabs.map((tab, index) => {
+                let isMatch = location.pathname.includes(tab.routeName);
+                return (
+                  <Link
+                    key={index}
+                    to={tab.path}
+                    className={
+                      "text text-charcoalBlack capitalize pb-3 relative " +
+                      (isMatch ? "font-satoshi-medium" : "")
+                    }
+                  >
+                    {tab.name}
+                    {isMatch && (
+                      <span className="absolute bottom-0 left-0 w-full border-b border-black" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+            <div>
+              <button
+                onClick={logout}
+                className="bg-red-500 text-white px-6 py-2 text-sm hover:bg-red-600 hover:text-white transition-all"
+              >
+                Logout
+              </button>
+            </div>
           </div>
           {/* Content Area */}
           <div className="">

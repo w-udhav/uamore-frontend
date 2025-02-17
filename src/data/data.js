@@ -11,6 +11,7 @@ const product = {
                         Uamore fragrances embody the highest standards of
                         luxury:
                       </article>
+                      <br/>
                       <article>
                         <b>Premium Ingredients </b>- Sourced from the finest
                         global origins.

@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function ProfileTab() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
   const { user } = useAuth();
+
+  const handleChange = (e) => {};
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-5 pb-20">
@@ -11,20 +19,14 @@ export default function ProfileTab() {
         </p>
         <div className="grid md:grid-cols-2 gap-5">
           <div className="flex flex-col gap-2">
-            <p className="text-sm">First Name</p>
+            <p className="text-sm">Name</p>
             <input
               type="text"
               value={user?.name}
+              name="name"
+              onChange={handleChange}
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
-              placeholder="Enter your first name"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <p className="text-sm">Last Name</p>
-            <input
-              type="text"
-              className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
-              placeholder="Enter your last name"
+              placeholder="Enter your name"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -32,6 +34,8 @@ export default function ProfileTab() {
             <input
               type="text"
               value={user?.email}
+              name="email"
+              onChange={handleChange}
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your last name"
             />
@@ -41,6 +45,8 @@ export default function ProfileTab() {
             <input
               type="text"
               value={user?.phone}
+              name="phone"
+              onChange={handleChange}
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your last name"
             />

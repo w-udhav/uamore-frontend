@@ -6,12 +6,14 @@ import React, {
   useState,
 } from "react";
 import { product } from "../data/data";
+import { useAuth } from "./AuthContext";
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([{ ...product, quantity: 1 }]);
+  const { user } = useAuth();
+  const [cart, setCart] = useState([]);
 
-  const addItemToCart = (item) => {
+  const addItemToCart = async (item) => {
     setCart([...cart, { ...item, quantity: 1 }]);
   };
 

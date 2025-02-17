@@ -12,20 +12,24 @@ import { product } from "../../data/data";
 
 import { useCart } from "../../contexts/CartContext";
 import Icon from "../../components/ui/Icon";
+import axiosInstance from "../../utils/axiosInstance";
+import { useParams } from "react-router-dom";
+import Logo from "../../components/ui/Logo";
 
 const tabs = ["description", "ingredients", "how to use"];
 
-export default function SingleProduct({ data = product }) {
+export default function SingleProduct() {
   // const [data, setData] = useState();
-  const [selectedSize, setSelectedSize] = useState("4 x 20mL");
+  const [selectedSize, setSelectedSize] = useState("");
   const [selectedTab, setSelectedTab] = useState("description");
   const [selectedTabContent, setSelectedTabContent] = useState("");
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cartItem, setCartItem] = useState([]);
 
   const { main, image1, image2, image3 } = single_product_display;
   const { cart, addItemToCart, updateCart } = useCart();
-
-  const cartItem = cart.find((item) => item.id === data.id);
 
   const handleAddToCart = () => {
     addItemToCart(data);
@@ -52,11 +56,6 @@ export default function SingleProduct({ data = product }) {
     if (tabs.includes(tab)) setSelectedTab(tab);
   };
 
-  const fetchProduct = async () => {
-    try {
-    } catch (error) {}
-  };
-
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -68,6 +67,37 @@ export default function SingleProduct({ data = product }) {
   };
 
   const productImages = [img1, img2, img3, mainImg];
+
+  const { id } = useParams();
+
+  const fetch = async () => {
+    try {
+      const res = await axiosInstance.get("/api/v1/products");
+      let x = res?.data?.data;
+      let prod = x.filter((item) => item?._id === id);
+      setData(prod[0]);
+      setSelectedSize(
+        prod[0]?.inventory.length > 0 && prod[0]?.inventory[0]?.size
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setCartItem(cart.find((item) => item?._id === data?._id));
+    fetch();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-svh flex justify-center items-center">
+        <Logo width="w-52" />
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -120,16 +150,19 @@ export default function SingleProduct({ data = product }) {
                 Select option:
               </p>
               <div className="flex gap-2">
-                <button
-                  className={`max-w-32 rounded-md px-3 py-2 border  text-sm font-satoshi-bold text-charcoalBlack/80 ${
-                    selectedSize === "4 x 20mL"
-                      ? "border-charcoalBlack/60 bg-charcoalBlack/10"
-                      : "border-charcoalBlack/50"
-                  }`}
-                  onClick={() => setSelectedSize("4 x 20mL")}
-                >
-                  4 x 20mL
-                </button>
+                {data &&
+                  data?.inventory.map((item) => (
+                    <button
+                      className={`max-w-32 rounded-md px-3 py-2 border  text-sm font-satoshi-bold text-charcoalBlack/80 ${
+                        selectedSize === item.size
+                          ? "border-charcoalBlack/60 bg-charcoalBlack/10"
+                          : "border-charcoalBlack/50"
+                      }`}
+                      onClick={() => setSelectedSize(item.size)}
+                    >
+                      {item.size}
+                    </button>
+                  ))}
               </div>
             </div>
 
@@ -191,14 +224,14 @@ export default function SingleProduct({ data = product }) {
                 <div className="text-left text-lg">
                   {selectedTab === "description" && (
                     <div
-                      dangerouslySetInnerHTML={{ __html: data?.about?.desc }}
+                      dangerouslySetInnerHTML={{ __html: product?.about?.desc }}
                     />
                   )}
 
                   {selectedTab === "ingredients" && (
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: data?.about?.ingredients,
+                        __html: product?.about?.ingredients,
                       }}
                     />
                   )}
@@ -206,7 +239,7 @@ export default function SingleProduct({ data = product }) {
                     <div
                       className="flex flex-col gap-3 leading-snug"
                       dangerouslySetInnerHTML={{
-                        __html: data?.about?.howToUse,
+                        __html: product?.about?.howToUse,
                       }}
                     />
                   )}
