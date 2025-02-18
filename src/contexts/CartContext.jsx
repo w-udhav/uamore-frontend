@@ -15,9 +15,9 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
-  const [couponDiscount, setCouponDiscound] = useState(0);
+  const [couponDiscount, setCouponDiscount] = useState(0);
   const [isCartLoading, setIsCartLoading] = useState(isLoggedIn ? true : false);
-
+  const [couponDetail, setCouponDetail] = useState();
   const fetchCart = async () => {
     if (isLoggedIn) {
       // setIsCartLoading(true);
@@ -26,7 +26,8 @@ export function CartProvider({ children }) {
         setCart(res?.data?.data?.items);
         setSubtotal(res?.data?.data?.subtotal);
         setTotal(res?.data?.data?.total);
-        setCouponDiscound(res?.data?.data?.coupon);
+        setCouponDiscount(res?.data?.data?.discountAmount);
+        setCouponDetail(res?.data?.data?.coupon);
       } catch (error) {
         console.log("Cart err");
       } finally {
@@ -78,7 +79,8 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const cartReciept = () => {
-    return { subtotal, couponDiscount, total };
+    let gst = subtotal * 0.18;
+    return { subtotal, couponDiscount, total, gst };
   };
 
   const getCouponValue = async (code) => {
@@ -89,6 +91,17 @@ export function CartProvider({ children }) {
       await fetchCart();
     } catch (error) {
       console.log("Invalid");
+    }
+  };
+
+  const removeCoupon = async () => {
+    try {
+      await axiosInstance.post("/api/v1/coupon/remove", {
+        coupon: couponDetail?.code,
+      });
+      await fetchCart();
+    } catch (error) {
+      console.log("Not done");
     }
   };
 
@@ -149,6 +162,8 @@ export function CartProvider({ children }) {
         isCartLoading,
         getCouponValue,
         couponDiscount,
+        couponDetail,
+        removeCoupon,
       }}
     >
       {children}

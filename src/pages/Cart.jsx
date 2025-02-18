@@ -17,12 +17,20 @@ export default function Cart() {
     isCartLoading,
     cartReciept,
     getCouponValue,
+    couponDetail,
+    removeCoupon,
   } = useCart();
   const navigate = useNavigate();
+  const { subtotal, total, couponDiscount: discount, gst } = cartReciept();
 
-  const [couponCode, setCouponCode] = useState("");
+  const [couponCode, setCouponCode] = useState(couponDetail?.code);
 
-  const { subtotal, total, couponDiscount: discount } = cartReciept();
+  const handleRemoveCoupon = async () => {
+    if (couponDetail?.code) {
+      await removeCoupon();
+    }
+    setCouponCode("");
+  };
 
   return (
     <motion.div
@@ -72,17 +80,27 @@ export default function Cart() {
                       <input
                         type="text"
                         name="coupon"
-                        value={couponCode}
+                        value={couponCode ?? couponDetail?.code}
                         onChange={(e) => setCouponCode(e.target.value)}
-                        className="w-full border-2 focus:border-black outline-none px-3 py-3 uppercase"
+                        className="w-full border-2 focus:border-black outline-none px-3 py-3 uppercase disabled:bg-zinc-200"
                         placeholder="Discount Code"
+                        disabled={couponDetail?.code}
                       />
-                      <button
-                        onClick={() => getCouponValue(couponCode)}
-                        className="w-32  p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
-                      >
-                        Apply
-                      </button>
+                      {couponDetail?.code ? (
+                        <button
+                          onClick={() => removeCoupon()}
+                          className="max-w-32 w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                        >
+                          Remove
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => getCouponValue(couponCode)}
+                          className="max-w-32 w-full  p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                        >
+                          Apply
+                        </button>
+                      )}
                     </div>
 
                     <div className="flex flex-col gap-3 border-b">
@@ -104,7 +122,9 @@ export default function Cart() {
                       </div>
                       <div className="font-semibold flex justify-between">
                         <span className="font-medium text-zinc-500">GST</span>
-                        <span className="text-lg text-zinc-400">0</span>
+                        <span className="text-lg text-zinc-400 line-through">
+                          ₹{isLoggedIn ? gst : 0}
+                        </span>
                       </div>
                     </div>
 
