@@ -14,6 +14,7 @@ import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
+import PolicyPage from "./pages/PolicyPage";
 
 export default function App() {
   return (
@@ -33,6 +34,22 @@ export default function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
+        <Route
+          path="/terms-and-conditions"
+          element={<PolicyPage policyKey="termsAndConditions" />}
+        />
+        <Route
+          path="/privacy-policy"
+          element={<PolicyPage policyKey="privacyPolicy" />}
+        />
+        <Route
+          path="/refund-policy"
+          element={<PolicyPage policyKey="refundPolicy" />}
+        />
+        <Route
+          path="/shipping-policy"
+          element={<PolicyPage policyKey="shippingPolicy" />}
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 

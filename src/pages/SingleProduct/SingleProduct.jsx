@@ -15,6 +15,7 @@ import Icon from "../../components/ui/Icon";
 import axiosInstance from "../../utils/axiosInstance";
 import { useParams } from "react-router-dom";
 import Logo from "../../components/ui/Logo";
+import { useAuth } from "../../contexts/AuthContext";
 
 const tabs = ["description", "ingredients", "how to use"];
 
@@ -28,23 +29,23 @@ export default function SingleProduct() {
   const [error, setError] = useState(null);
   const [cartItem, setCartItem] = useState([]);
 
-  const { main, image1, image2, image3 } = single_product_display;
   const { cart, addItemToCart, updateCart } = useCart();
+  const { isLoggedIn } = useAuth();
 
   const handleAddToCart = () => {
     addItemToCart(data);
   };
 
   const handleIncrement = () => {
-    const totalQuantity = data?.quantity;
+    const totalQuantity = data?.inventory[0]?.items;
     if (cartItem?.quantity === totalQuantity) {
       setError("Maximum quantity reached");
       return;
     }
-    updateCart(data.id, 1);
+    updateCart(cartItem?.product?._id, 1);
   };
   const handleDecrement = () => {
-    updateCart(cartItem.id, -1);
+    updateCart(cartItem?.product?._id, -1);
   };
 
   useEffect(() => {
@@ -87,9 +88,15 @@ export default function SingleProduct() {
   };
 
   useEffect(() => {
-    setCartItem(cart.find((item) => item?._id === data?._id));
+    if (isLoggedIn) {
+      setCartItem(cart.find((item) => item?.product?._id === data?._id));
+    } else {
+      setCartItem(cart.find((item) => item?._id === data?._id));
+    }
     fetch();
-  }, []);
+  }, [cart]);
+
+  console.log(cartItem);
 
   if (loading) {
     return (
@@ -144,8 +151,9 @@ export default function SingleProduct() {
                 {product.subtitle}
               </p>
             </div>
+            <div />
             {/* Size */}
-            <div className="flex gap-5 items-start md:items-center">
+            {/* <div className="flex gap-5 items-start md:items-center">
               <p className="text-charcoalBlack/60 text-sm font-satoshi-medium">
                 Select option:
               </p>
@@ -164,7 +172,7 @@ export default function SingleProduct() {
                     </button>
                   ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Buy */}
             {/* <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">

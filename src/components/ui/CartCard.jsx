@@ -1,19 +1,20 @@
 import React from "react";
 import Icon from "./Icon";
+import img from "../../assets/products/BOX.jpg";
 
 export default function CartCard({ data, handleIncrement, handleDecrement }) {
   return (
     <div className="border-b py-1">
       <div className="flex items-start gap-4 p-2">
-        <div className="w-40 h-40 bg-zinc-50 rounded-md">
-          <img src={data?.displayImg} alt="perfume" />
+        <div className="w-52 h-32 bg-zinc-50 rounded-md">
+          <img src={img} alt="perfume" className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col gap-2 w-full">
           <div className="text-zinc-800 font-medium">
-            {data?.name || "Name"}
+            {data?.product?.name || "Name"}
           </div>
           <div className="text-sm text-gray-500">
-            {data?.subtitle || "category"}
+            {data?.product?.subtitle || "category"}
           </div>
           <div className="flex justify-between w-full">
             <div className="flex items-center gap-4 border max-w-32 w-full">
@@ -38,7 +39,7 @@ export default function CartCard({ data, handleIncrement, handleDecrement }) {
             </div>
 
             <div>
-              <div className="text-xl font-medium">₹{data?.price}</div>
+              <div className="text-xl font-medium">₹{data?.product?.price}</div>
             </div>
           </div>
         </div>
