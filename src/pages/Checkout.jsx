@@ -134,8 +134,8 @@ export default function Checkout() {
     }
 
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY,
-      KeySecret: import.meta.env.VITE_RAZORPAY_KEY_SECRET,
+      key: "rzp_test_IfN2wjYveyC6WC",
+      KeySecret: "aIq3n5XdfbKxzgHNEatBt8bc",
       amount: orderData?.data?.totalPrice * 100,
       currency: "INR",
       name: userDetails.name,

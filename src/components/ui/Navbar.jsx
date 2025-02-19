@@ -167,17 +167,17 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex flex-col gap-5 font-medium">
-                  <Link to="/products" className="">
+                  <Link to="/products" onClick={handleHamburger}>
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
                       Shop Perfumes
                     </p>
                   </Link>
-                  <Link to="/blogs" className="">
+                  <Link to="/blogs" onClick={handleHamburger}>
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
                       Scent Journal
                     </p>
                   </Link>
-                  <Link to="/about-us" className="">
+                  <Link to="/about-us" onClick={handleHamburger}>
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
                       Know About Us
                     </p>

@@ -6,7 +6,7 @@ export default function BlogDisplayCard({ data }) {
   console.log(data.image);
   return (
     <Link
-      to={`blogs/${data.id}`}
+      to={`/blogs/${data.id}`}
       className="w-full max-w-md overflow-hidden flex flex-col gap-3"
     >
       <div className="max-h-[26rem] h-full w-full relative">
