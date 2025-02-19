@@ -127,7 +127,10 @@ export default function Cart() {
                       <div className="font-semibold flex justify-between">
                         <span className="font-medium text-zinc-500">GST</span>
                         <span className="text-lg text-zinc-400 line-through">
-                          ₹{isLoggedIn ? gst : calculateCartValue * 0.18}
+                          ₹
+                          {isLoggedIn
+                            ? gst
+                            : (calculateCartValue * 0.18).toFixed(2)}
                         </span>
                       </div>
                     </div>

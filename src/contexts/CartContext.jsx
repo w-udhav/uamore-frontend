@@ -79,7 +79,7 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const cartReciept = () => {
-    let gst = subtotal * 0.18;
+    let gst = (subtotal * 0.18).toFixed(2);
     return { subtotal, couponDiscount, total, gst };
   };
 

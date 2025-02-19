@@ -87,6 +87,7 @@ export default function Checkout() {
 
     // Call backend to create an order
     let orderData;
+    let order_id;
 
     if (isLoggedIn) {
       orderData = await axiosInstance.post("/api/v1/order", {
@@ -103,7 +104,7 @@ export default function Checkout() {
       });
     } else {
       let cartItems = [];
-      cartItems.map((item) => {
+      cart.map((item) => {
         cartItems.push({
           product: {
             id: item._id,
@@ -136,15 +137,15 @@ export default function Checkout() {
     const options = {
       key: "rzp_test_IfN2wjYveyC6WC",
       KeySecret: "aIq3n5XdfbKxzgHNEatBt8bc",
-      amount: orderData?.data?.totalPrice * 100,
+      amount: orderData?.data?.data?.totalPrice * 100,
       currency: "INR",
       name: userDetails.name,
       description: "UAmore transaction",
       image: { logo },
-      order_id: orderData?.data?.paymentInfo?.gatewayOrderId,
+      order_id: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
       handler: async function (response) {
         const data = {
-          orderCreationId: orderData?.data?.paymentInfo?.gatewayOrderId,
+          orderCreationId: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
           razorpayPaymentId: response.razorpay_payment_id,
           razorpayOrderId: response.razorpay_order_id,
           razorpaySignature: response.razorpay_signature,
@@ -156,7 +157,7 @@ export default function Checkout() {
           data
         );
 
-        alert(result.data.msg);
+        navigate("/success");
       },
       prefill: {
         name: userDetails.name,
@@ -328,7 +329,7 @@ export default function Checkout() {
             <div className="font-semibold flex justify-between">
               <span className="font-medium text-zinc-500">GST</span>
               <span className="text-lg text-zinc-400 line-through">
-                ₹{isLoggedIn ? gst : calculateCartValue * 0.18}
+                ₹{isLoggedIn ? gst : (calculateCartValue * 0.18).toFixed(2)}
               </span>
             </div>
           </div>

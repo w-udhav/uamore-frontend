@@ -25,12 +25,12 @@ export default function Account() {
       path: `/account/orders`,
       routeName: "orders",
     },
-    {
-      id: 3,
-      name: "Settings",
-      path: `/account/settings`,
-      routeName: "settings",
-    },
+    // {
+    //   id: 3,
+    //   name: "Settings",
+    //   path: `/account/settings`,
+    //   routeName: "settings",
+    // },
   ];
 
   if (!isLoggedIn) {
@@ -105,7 +105,7 @@ export default function Account() {
             <Routes>
               <Route path="/user" element={<ProfileTab />} />
               <Route path="/orders" element={<OrdersTab />} />
-              <Route path="/settings" element={<SettingsTab />} />
+              {/* <Route path="/settings" element={<SettingsTab />} /> */}
             </Routes>
           </div>
         </div>

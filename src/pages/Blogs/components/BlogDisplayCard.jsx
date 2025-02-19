@@ -18,9 +18,7 @@ export default function BlogDisplayCard({ data }) {
       </div>
 
       <div className="">
-        <p className="text-lg uppercase text- font-satoshi-bold">
-          {data.title}
-        </p>
+        <p className="text-lg line-clamp-2">{data.title}</p>
         {/* <p className="text-sm text-charcoalBlack/80 line-clamp-2">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit
         </p> */}
