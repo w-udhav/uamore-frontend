@@ -96,8 +96,6 @@ export default function SingleProduct() {
     fetch();
   }, [cart]);
 
-  console.log(cartItem);
-
   if (loading) {
     return (
       <div className="min-h-svh flex justify-center items-center">

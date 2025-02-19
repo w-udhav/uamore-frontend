@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
 
 const AuthContext = createContext();
 
@@ -23,6 +24,55 @@ export function AuthProvider({ children }) {
     }
   }, [user, token]);
 
+  const getDetails = async () => {
+    if (isLoggedIn) {
+      try {
+        const res = await axiosInstance.get("/api/v1/profile");
+        setUser(res?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const addAddress = async (address) => {
+    const {
+      receiverName,
+      addressLine1,
+      addressLine2,
+      city,
+      state,
+      addressType,
+      pincode,
+      country,
+    } = address;
+    if (isLoggedIn) {
+      try {
+        let requestBody = {
+          addresses: [
+            {
+              receiverName,
+              addressLine1,
+              addressLine2,
+              city,
+              state,
+              addressType,
+              pincode,
+              country,
+            },
+          ],
+        };
+        const res = await axiosInstance.patch(
+          "/api/v1/profile/update",
+          requestBody
+        );
+        await getDetails();
+
+        return res;
+      } catch (error) {}
+    }
+  };
+
   const login = (userData) => {
     setUser(userData);
     setToken(userData?.token);
@@ -42,7 +92,16 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, isLoggedIn, login, logout, setUser }}
+      value={{
+        user,
+        token,
+        isLoggedIn,
+        login,
+        logout,
+        setUser,
+        getDetails,
+        addAddress,
+      }}
     >
       {children}
     </AuthContext.Provider>

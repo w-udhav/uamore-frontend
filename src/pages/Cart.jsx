@@ -76,32 +76,34 @@ export default function Cart() {
                   </div>
                   <div className="flex flex-col gap-5">
                     {/* Coupon */}
-                    <div className="flex gap-2 w-full ">
-                      <input
-                        type="text"
-                        name="coupon"
-                        value={couponCode ?? couponDetail?.code}
-                        onChange={(e) => setCouponCode(e.target.value)}
-                        className="w-full border-2 focus:border-black outline-none px-3 py-3 uppercase disabled:bg-zinc-200"
-                        placeholder="Discount Code"
-                        disabled={couponDetail?.code}
-                      />
-                      {couponDetail?.code ? (
-                        <button
-                          onClick={() => removeCoupon()}
-                          className="max-w-32 w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
-                        >
-                          Remove
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => getCouponValue(couponCode)}
-                          className="max-w-32 w-full  p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
-                        >
-                          Apply
-                        </button>
-                      )}
-                    </div>
+                    {isLoggedIn && (
+                      <div className="flex gap-2 w-full ">
+                        <input
+                          type="text"
+                          name="coupon"
+                          value={couponCode ?? couponDetail?.code}
+                          onChange={(e) => setCouponCode(e.target.value)}
+                          className="w-full border-2 focus:border-black outline-none px-3 py-3 uppercase disabled:bg-zinc-200"
+                          placeholder="Discount Code"
+                          disabled={couponDetail?.code}
+                        />
+                        {couponDetail?.code ? (
+                          <button
+                            onClick={() => removeCoupon()}
+                            className="max-w-32 w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                          >
+                            Remove
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => getCouponValue(couponCode)}
+                            className="max-w-32 w-full  p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                          >
+                            Apply
+                          </button>
+                        )}
+                      </div>
+                    )}
 
                     <div className="flex flex-col gap-3 border-b">
                       <div className="font-semibold flex justify-between">
@@ -112,18 +114,20 @@ export default function Cart() {
                           ₹{isLoggedIn ? subtotal : calculateCartValue}
                         </span>
                       </div>
-                      <div className="font-semibold flex justify-between">
-                        <span className="font-medium text-zinc-500">
-                          Discount
-                        </span>
-                        <span className="text-lg text-green-400">
-                          - ₹{isLoggedIn ? discount : couponDiscount}
-                        </span>
-                      </div>
+                      {isLoggedIn && (
+                        <div className="font-semibold flex justify-between">
+                          <span className="font-medium text-zinc-500">
+                            Discount
+                          </span>
+                          <span className="text-lg text-green-400">
+                            - ₹{discount}
+                          </span>
+                        </div>
+                      )}
                       <div className="font-semibold flex justify-between">
                         <span className="font-medium text-zinc-500">GST</span>
                         <span className="text-lg text-zinc-400 line-through">
-                          ₹{isLoggedIn ? gst : 0}
+                          ₹{isLoggedIn ? gst : calculateCartValue * 0.18}
                         </span>
                       </div>
                     </div>
