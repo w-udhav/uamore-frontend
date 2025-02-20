@@ -1,34 +1,21 @@
 import React from "react";
 import MainLayout from "../layout/MainLayout";
-import facebook from "../../assets/social icons/facebook.svg";
-import instagram from "../../assets/social icons/instagram.svg";
-import linkedin from "../../assets/social icons/linkedin.svg";
-import twitter from "../../assets/social icons/twitter.svg";
 import { Link } from "react-router-dom";
 import CTAButton from "./CTAButton";
-import logo_black from "../../assets/logos/logo_black.png";
 import Logo from "./Logo";
 
 const socialLinks = [
   {
     name: "Facebook",
-    icon: facebook,
-    link: "https://www.facebook.com/",
+    link: "https://www.facebook.com/share/15jDtkmdzN/?mibextid=wwXIfr",
   },
   {
     name: "Instagram",
-    icon: instagram,
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/_uamore/",
   },
   {
-    name: "LinkedIn",
-    icon: linkedin,
-    link: "https://www.linkedin.com/",
-  },
-  {
-    name: "Twitter",
-    icon: twitter,
-    link: "https://www.twitter.com/",
+    name: "Pinterest",
+    link: "https://in.pinterest.com/UAmore_/",
   },
 ];
 
@@ -43,13 +30,18 @@ const footerLinks = [
   },
   {
     title: "Customer Care",
-    links: [{ name: "Address", link: "/address" }],
+    links: [
+      { name: "Call us", link: "tel:+919588376534" },
+      { name: "Drop a mail", link: "mailto:help@uamore.com" },
+    ],
   },
   {
     title: "Site Map",
     links: [
       { name: "Home", link: "/" },
+      { name: "Products", link: "/products" },
       { name: "About Us", link: "/about-us" },
+      { name: "Blogs", link: "/blogs" },
     ],
   },
 ];
@@ -118,7 +110,10 @@ export default function Footer() {
           <Logo type="black" />
         </div>
         <p className="text-right text-sm flex-1 text-zinc-500 flex-wrap">
-          All Rights Reserved | Privacy Policy | Terms and Conditions
+          <Link to="/terms-and-conditions">Terms and Conditions</Link> |{" "}
+          <Link to="/privacy-policy">Privacy Policy</Link> |{" "}
+          <Link to="/refund-policy">Refund Policy</Link> |{" "}
+          <Link to="/shipping-policy">Shipping Policy</Link>
         </p>
       </div>
     </MainLayout>

@@ -186,16 +186,33 @@ export default function Navbar() {
                     <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
                       Contact us
                     </p>
-                    <div className="text-[15px] pl-4">
-                      <div>Phone: 1234567890</div>
-                      <div>Email: helpdesk@uamore.com</div>
-                      <div>
-                        Address:
-                        <span className="text-charcoalBlack">
-                          1234, Lorem ipsum dolor sit amet, consectetur
-                          adipisicing elit
-                        </span>
-                      </div>
+                    <div className="text-[15px] pl-4 text-charcoalBlack/50 font-semibold grid grid-cols-5 gap-2">
+                      <div>Phone:</div>
+                      <a
+                        href="tel:+919588376534"
+                        className="text-charcoalBlack col-span-4"
+                      >
+                        +91 9588376534
+                      </a>
+                      <div>Email: </div>
+                      <a
+                        href="mailto:help@uamore.com"
+                        className="text-charcoalBlack  col-span-4"
+                      >
+                        help@uamore.com
+                      </a>
+                      <div>Address:</div>
+                      <a
+                        className="text-charcoalBlack col-span-4"
+                        href="http://maps.google.com/?q=1200 Essenceara luxe pvt ltd, house no. 195/2, goel kunj,
+                        street opposite to nursing sadan, near gulati road parao
+                        enclave Samalkha , Panipat 132101"
+                        target="_blank"
+                      >
+                        Essenceara luxe pvt ltd, house no. 195/2, goel kunj,
+                        street opposite to nursing sadan, near gulati road parao
+                        enclave Samalkha , Panipat 132101
+                      </a>
                     </div>
                   </div>
                 </div>

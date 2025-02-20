@@ -181,6 +181,7 @@ const blogs = [
       `<li>Ayurette velvet-like fusion of amber, leather and woods renders forth confidence and legacy. </li>`,
       `<li>Powdered and metallic notes lend a modern twist to a classical refinement. </li>`,
       `An authentic signature perfume stays beyond the moment to imprint on one's mind. Uamore makes perfumes that do not just accompany you—they become you. `,
+      `<br/>`,
       `<h3>Choosing Your Signature Scent – The Art of Self-Expression  </h3>`,
       `Fragrance is very personal; it is what defines who you are and how you would like to be perceived.`,
       `<h4>The Confident Leader- audacious, alluring, and commanding. </h3>`,

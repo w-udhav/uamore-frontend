@@ -25,7 +25,7 @@ export default function Home() {
           <img
             src={sample}
             alt="image"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-[50%]"
           />
         </div>
         <MainLayout className="pb-12 w-full h-full text-center text-white z-10 flex items-end absolute top-0 left-0">
@@ -37,7 +37,7 @@ export default function Home() {
               </p> */}
               <h3 className="text-5xl font-thin">UAmore</h3>
               <Link
-                to="/products"
+                to="/product/1"
                 className="max-w-max underline underline-offset-4 text-sm mt-3"
               >
                 Shop Now
@@ -79,7 +79,7 @@ export default function Home() {
               </p>
               {/* <h3 className="text-5xl font-thin">Valentine's Day</h3> */}
               <Link
-                to="/"
+                to="/product/1"
                 className="max-w-max underline underline-offset-4 text-sm mt-5"
               >
                 Shop Now

@@ -15,6 +15,7 @@ export default function Checkout() {
 
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [userDetails, setUserDetails] = useState({
     name: user?.name ?? "",
     email: user?.email ?? "",
@@ -86,22 +87,28 @@ export default function Checkout() {
     }
 
     // Call backend to create an order
+    setIsLoading(true);
+
     let orderData;
     let order_id;
 
     if (isLoggedIn) {
-      orderData = await axiosInstance.post("/api/v1/order", {
-        Address: {
-          receiverName: userDetails.receiverName,
-          addressLine1: userDetails.addressLine1,
-          addressLine2: userDetails.addressLine2,
-          city: userDetails.city,
-          state: userDetails.state,
-          addressType: userDetails.addressType,
-          pincode: userDetails.pincode,
-          country: userDetails.country,
-        },
-      });
+      try {
+        orderData = await axiosInstance.post("/api/v1/order", {
+          Address: {
+            receiverName: userDetails.receiverName,
+            addressLine1: userDetails.addressLine1,
+            addressLine2: userDetails.addressLine2,
+            city: userDetails.city,
+            state: userDetails.state,
+            addressType: userDetails.addressType,
+            pincode: userDetails.pincode,
+            country: userDetails.country,
+          },
+        });
+      } catch (error) {
+        setIsLoading(false);
+      }
     } else {
       let cartItems = [];
       cart.map((item) => {
@@ -116,22 +123,26 @@ export default function Checkout() {
           quantity: item.quantity,
         });
       });
-      orderData = await axiosInstance.post("/api/v1/order-guest", {
-        Address: {
-          receiverName: userDetails.receiverName,
-          addressLine1: userDetails.addressLine1,
-          addressLine2: userDetails.addressLine2,
-          city: userDetails.city,
-          state: userDetails.state,
-          addressType: userDetails.addressType,
-          pincode: userDetails.pincode,
-          country: userDetails.country,
-        },
-        phone: userDetails?.phone,
-        cartItems: cartItems,
-        name: userDetails?.name,
-        email: userDetails?.email,
-      });
+      try {
+        orderData = await axiosInstance.post("/api/v1/order-guest", {
+          Address: {
+            receiverName: userDetails.receiverName,
+            addressLine1: userDetails.addressLine1,
+            addressLine2: userDetails.addressLine2,
+            city: userDetails.city,
+            state: userDetails.state,
+            addressType: userDetails.addressType,
+            pincode: userDetails.pincode,
+            country: userDetails.country,
+          },
+          phone: userDetails?.phone,
+          cartItems: cartItems,
+          name: userDetails?.name,
+          email: userDetails?.email,
+        });
+      } catch (error) {
+        setIsLoading(false);
+      }
     }
 
     const options = {
@@ -156,7 +167,7 @@ export default function Checkout() {
           "/api/v1/verify-purchase",
           data
         );
-
+        setIsLoading(false);
         navigate("/success");
       },
       prefill: {

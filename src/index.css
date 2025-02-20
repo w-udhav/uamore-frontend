@@ -22,7 +22,7 @@ h2 {
 }
 
 h3 {
-  @apply text-4xl;
+  @apply text-4xl leading-tight;
 }
 
 h4 {
@@ -38,6 +38,10 @@ h6 {
 
 p {
 	@apply font-satoshi-regular text-xl font-normal tracking-wide leading-[1.8rem];
+}
+
+li {
+  @apply text-[18px];
 }
 
 
@@ -78,6 +82,3 @@ p {
   background-size: cover;
 }
 
-li {
-  @apply text-[18px];
-}

@@ -24,7 +24,7 @@ export default function SingleBlog() {
         {/* Top */}
         <div className="py-8 border-b flex flex-col gap-10">
           <img src={sample} className="w-full h-full" alt="blog" />
-          <h2>{blog.title}</h2>
+          <h2 className="leading-tight">{blog.title}</h2>
         </div>
 
         {/* Content */}
