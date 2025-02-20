@@ -26,7 +26,10 @@ export default function AllBlogs() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5 lg:gap-14 gap-y-12 mt-16">
-            <BlogDisplayCard data={blogs[0]} />
+            {blogs &&
+              blogs.map((blog) => (
+                <BlogDisplayCard key={blog.id} data={blog} />
+              ))}
           </div>
         </div>
       </MainLayout>

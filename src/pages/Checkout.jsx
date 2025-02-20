@@ -161,7 +161,6 @@ export default function Checkout() {
           razorpayOrderId: response.razorpay_order_id,
           razorpaySignature: response.razorpay_signature,
         };
-        console.log(response);
 
         const result = await axiosInstance.post(
           "/api/v1/verify-purchase",

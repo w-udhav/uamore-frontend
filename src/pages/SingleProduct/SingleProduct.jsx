@@ -28,6 +28,7 @@ export default function SingleProduct() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cartItem, setCartItem] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { cart, addItemToCart, updateCart } = useCart();
   const { isLoggedIn } = useAuth();
@@ -72,29 +73,42 @@ export default function SingleProduct() {
   const { id } = useParams();
 
   const fetch = async () => {
+    setIsLoading(true);
     try {
       const res = await axiosInstance.get("/api/v1/products");
       let x = res?.data?.data;
       let prod = x.filter((item) => item?._id === id);
+      console.log("inside: ", x);
       setData(prod[0]);
       setSelectedSize(
         prod[0]?.inventory.length > 0 && prod[0]?.inventory[0]?.size
       );
+      if (isLoggedIn) {
+        setCartItem(cart.find((item) => item?.product?._id === data?._id));
+      } else {
+        setCartItem(cart.find((item) => item?._id === data?._id));
+      }
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (isLoggedIn) {
       setCartItem(cart.find((item) => item?.product?._id === data?._id));
     } else {
       setCartItem(cart.find((item) => item?._id === data?._id));
     }
+    setIsLoading(false);
+  }, [data, cart]);
+
+  useEffect(() => {
     fetch();
-  }, [cart]);
+  }, []);
 
   if (loading) {
     return (
@@ -177,7 +191,11 @@ export default function SingleProduct() {
               Add to Bag
             </button> */}
             <div className="w-full">
-              {cartItem ? (
+              {isLoading ? (
+                <button className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black">
+                  Smelling something...
+                </button>
+              ) : cartItem ? (
                 <div className="flex items-center gap-4 border w-full ">
                   <button
                     onClick={handleDecrement}
@@ -199,6 +217,7 @@ export default function SingleProduct() {
                 <button
                   onClick={handleAddToCart}
                   className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                  disabled={isLoading}
                 >
                   Add to Bag
                 </button>

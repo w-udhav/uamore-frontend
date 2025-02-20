@@ -87,7 +87,7 @@ export default function ProfileTab() {
             Update
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="flex flex-col gap-2">
             <p className="text-sm">Receiver Name</p>
             <input

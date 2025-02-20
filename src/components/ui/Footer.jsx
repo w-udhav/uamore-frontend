@@ -96,7 +96,7 @@ export default function Footer() {
         </div>
       </div>
       {/* Footer bottom */}
-      <div className="flex text-sm items-center justify-between mt-5">
+      <div className="flex flex-col md:flex-row text-sm items-center justify-between gap-5 mt-5 mb-2">
         {/* Social links */}
         <div className="flex-1 flex flex-wrap items-center gap-4 text-sm">
           <p className="text-sm text-zinc-500 w-max">Follow us:</p>
@@ -109,7 +109,7 @@ export default function Footer() {
         <div className="flex-1 flex flex-col items-center text-zinc-500">
           <Logo type="black" />
         </div>
-        <p className="text-right text-sm flex-1 text-zinc-500 flex-wrap">
+        <p className="text-right text-sm flex-1 text-zinc-500 flex justify-end flex-wrap gap-2">
           <Link to="/terms-and-conditions">Terms and Conditions</Link> |{" "}
           <Link to="/privacy-policy">Privacy Policy</Link> |{" "}
           <Link to="/refund-policy">Refund Policy</Link> |{" "}

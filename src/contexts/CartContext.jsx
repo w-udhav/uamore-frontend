@@ -41,13 +41,14 @@ export function CartProvider({ children }) {
   }, [isLoggedIn]);
 
   const addItemToCart = async (item) => {
-    if (isLoggedIn) {
+    if (isLoggedIn && item) {
       const res = await axiosInstance.post("/api/v1/cart/add", {
         productId: item?._id,
         count: 1,
       });
       if (res.status !== 200) return;
     }
+    console.log(item);
     const existingItemIndex = cart.findIndex(
       (cartItem) => cartItem._id === item._id
     );
