@@ -369,6 +369,7 @@ const blogs = [
     id: 3,
     title: "House of UAmore",
     image: "",
+    author: "Kartik",
     content: [
       `A luxury perfume is not just a high-end scent; it is a statement; a lingering impression that speaks before words do. At UAmore, every premium fragrance is designed to embody elegance, evoke deep emotions, and leave an unforgettable mark. Rooted in India's rich high-end perfumery heritage and elevated by cutting-edge techniques, each Uamore fragrance is the epitome of opulence, passion, and refinement. `,
       `<br/>`,

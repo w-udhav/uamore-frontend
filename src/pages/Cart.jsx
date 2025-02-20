@@ -24,14 +24,24 @@ export default function Cart() {
   const { subtotal, total, couponDiscount: discount, gst } = cartReciept();
 
   const [couponCode, setCouponCode] = useState(couponDetail?.code);
+  const [isCouponLoading, setIsCouponLoading] = useState(false);
 
   const handleRemoveCoupon = async () => {
     if (couponDetail?.code) {
+      setIsCouponLoading(true);
       await removeCoupon();
     }
+    setIsCouponLoading(false);
     setCouponCode("");
   };
 
+  const handleApplyCoupon = async () => {
+    setIsCouponLoading(true);
+    try {
+      await getCouponValue(couponCode);
+    } catch (error) {}
+    setIsCouponLoading(false);
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -77,31 +87,41 @@ export default function Cart() {
                   <div className="flex flex-col gap-5">
                     {/* Coupon */}
                     {isLoggedIn && (
-                      <div className="flex gap-2 w-full ">
-                        <input
-                          type="text"
-                          name="coupon"
-                          value={couponCode ?? couponDetail?.code}
-                          onChange={(e) => setCouponCode(e.target.value)}
-                          className="w-full border-2 focus:border-black outline-none px-3 py-3 uppercase disabled:bg-zinc-200"
-                          placeholder="Discount Code"
-                          disabled={couponDetail?.code}
-                        />
-                        {couponDetail?.code ? (
-                          <button
-                            onClick={() => removeCoupon()}
-                            className="max-w-32 w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
-                          >
-                            Remove
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => getCouponValue(couponCode)}
-                            className="max-w-32 w-full  p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
-                          >
-                            Apply
-                          </button>
-                        )}
+                      <div className="flex flex-col gap-1">
+                        <p className="text-sm">
+                          Apply{" "}
+                          <span className="font-bold">UAMOREFIRST - </span>
+                          To Get <b>5% OFF</b> on your First Order
+                        </p>
+                        <div className="flex gap-2 w-full ">
+                          <input
+                            type="text"
+                            name="coupon"
+                            value={couponCode ?? couponDetail?.code}
+                            onChange={(e) => setCouponCode(e.target.value)}
+                            className="w-full border-2 focus:border-black outline-none px-3 py-3 uppercase disabled:bg-zinc-200"
+                            placeholder="Discount Code"
+                            disabled={couponDetail?.code}
+                          />
+
+                          {couponDetail?.code ? (
+                            <button
+                              onClick={handleRemoveCoupon}
+                              className="max-w-32 w-full p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                              disabled={isCouponLoading}
+                            >
+                              {isCouponLoading ? "Loading..." : "Remove"}
+                            </button>
+                          ) : (
+                            <button
+                              onClick={handleApplyCoupon}
+                              className="max-w-32 w-full  p-4  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
+                              disabled={isCouponLoading}
+                            >
+                              {isCouponLoading ? "Loading..." : "Apply"}
+                            </button>
+                          )}
+                        </div>
                       </div>
                     )}
 

@@ -13,7 +13,7 @@ import { product } from "../../data/data";
 import { useCart } from "../../contexts/CartContext";
 import Icon from "../../components/ui/Icon";
 import axiosInstance from "../../utils/axiosInstance";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Logo from "../../components/ui/Logo";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -196,22 +196,34 @@ export default function SingleProduct() {
                   Smelling something...
                 </button>
               ) : cartItem ? (
-                <div className="flex items-center gap-4 border w-full ">
-                  <button
-                    onClick={handleDecrement}
-                    className="hover:bg-charcoalBlack hover:text-white flex items-center justify-center"
-                  >
-                    <Icon name="remove" className=" w-full text-xl  p-4 px-6" />
-                  </button>
-                  <div className="font-semibold flex-1 flex justify-center">
-                    {cartItem?.quantity}
+                <div className="w-full flex flex-col gap-3">
+                  <div className="flex items-center gap-4 border w-full ">
+                    <button
+                      onClick={handleDecrement}
+                      className="hover:bg-charcoalBlack hover:text-white flex items-center justify-center"
+                    >
+                      <Icon
+                        name="remove"
+                        className=" w-full text-xl  p-4 px-6"
+                      />
+                    </button>
+                    <div className="font-semibold flex-1 flex justify-center">
+                      {cartItem?.quantity}
+                    </div>
+                    <button
+                      onClick={handleIncrement}
+                      className="hover:bg-charcoalBlack hover:text-white flex items-center justify-center"
+                    >
+                      <Icon name="add" className="text-xl  p-4 px-6" />
+                    </button>
                   </div>
-                  <button
-                    onClick={handleIncrement}
-                    className="hover:bg-charcoalBlack hover:text-white flex items-center justify-center"
+
+                  <Link
+                    to="/cart"
+                    className="w-full p-4 px-6 font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
                   >
-                    <Icon name="add" className="text-xl  p-4 px-6" />
-                  </button>
+                    Go to cart
+                  </Link>
                 </div>
               ) : (
                 <button

@@ -70,7 +70,6 @@ export default function Checkout() {
       !userDetails.email ||
       !userDetails.phone ||
       !userDetails.addressLine1 ||
-      !userDetails.addressLine2 ||
       !userDetails.addressType ||
       !userDetails.city ||
       !userDetails.country ||
@@ -154,6 +153,9 @@ export default function Checkout() {
       description: "UAmore transaction",
       image: { logo },
       order_id: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
+      notes: {
+        orderId: orderData?.data?.data?._id,
+      },
       handler: async function (response) {
         const data = {
           orderCreationId: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
