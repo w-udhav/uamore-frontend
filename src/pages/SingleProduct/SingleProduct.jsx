@@ -30,11 +30,11 @@ export default function SingleProduct() {
   const [cartItem, setCartItem] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { cart, addItemToCart, updateCart } = useCart();
+  const { cart, addItemToCart, updateCart, fetchCart } = useCart();
   const { isLoggedIn } = useAuth();
 
-  const handleAddToCart = () => {
-    addItemToCart(data);
+  const handleAddToCart = async () => {
+    await addItemToCart(data);
   };
 
   const handleIncrement = () => {
@@ -109,6 +109,14 @@ export default function SingleProduct() {
   useEffect(() => {
     fetch();
   }, []);
+
+  useEffect(() => {
+    fetchCart();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log("Cart state updated:");
+  }, [cart]); // Log whenever cart changes
 
   if (loading) {
     return (
@@ -231,7 +239,7 @@ export default function SingleProduct() {
                   className="w-full  p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
                   disabled={isLoading}
                 >
-                  Add to Bag
+                  {isLoading ? "Adding... " : "Add to Bag"}
                 </button>
               )}
               <p className="text-sm text-red-500">{error && error}</p>

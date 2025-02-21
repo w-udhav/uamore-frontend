@@ -24,6 +24,7 @@ export function CartProvider({ children }) {
       // setIsCartLoading(true);
       try {
         const res = await axiosInstance.get("/api/v1/my-cart");
+        if (res?.data?.data && res?.data?.data.length === 0) return;
         setCart(res?.data?.data?.items);
         setSubtotal(res?.data?.data?.subtotal);
         setTotal(res?.data?.data?.total);
@@ -43,42 +44,42 @@ export function CartProvider({ children }) {
 
   const addItemToCart = async (item) => {
     if (isLoggedIn && item) {
-      const res = await axiosInstance.post("/api/v1/cart/add", {
-        productId: item?._id,
-        count: 1,
-      });
-      if (res.status !== 200) return;
+      try {
+        const res = await axiosInstance.post("/api/v1/cart/add", {
+          productId: item?._id,
+          count: 1,
+        });
+        if (res.status !== 200) return;
+        await fetchCart();
+        return;
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
     }
-    console.log(item);
-    const existingItemIndex = cart.findIndex(
-      (cartItem) => cartItem._id === item._id
-    );
 
-    if (existingItemIndex !== -1) {
-      // If item exists, increment quantity
-      const updatedCart = cart.map((cartItem, index) =>
-        index === existingItemIndex
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
-          : cartItem
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (cartItem) => cartItem._id === item._id
       );
-      setCart(updatedCart);
-    } else {
-      // If item does not exist, add it with quantity 1
-      setCart([...cart, { ...item, quantity: 1 }]);
-    }
+
+      if (existingItemIndex !== -1) {
+        return prevCart.map((cartItem, index) =>
+          index === existingItemIndex
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      }
+
+      return [...prevCart, { ...item, quantity: 1 }];
+    });
   };
 
   const calculateCartValue = useMemo(() => {
-    if (cart && cart.length === 0) return 0;
-    if (isLoggedIn) {
-      return total;
-    } else {
-      return cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
-    }
-  }, [cart]);
+    if (!cart.length) return 0;
+    return isLoggedIn
+      ? total
+      : cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  }, [cart, total]);
 
   const cartReciept = () => {
     let gst = (subtotal * 0.18).toFixed(2);

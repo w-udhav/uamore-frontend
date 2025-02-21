@@ -37,7 +37,7 @@ export default function Home() {
               </p> */}
               <h3 className="text-5xl font-thin">UAmore</h3>
               <Link
-                to="/product"
+                to="/products"
                 className="max-w-max underline underline-offset-4 text-sm mt-3"
               >
                 Shop Now
@@ -79,7 +79,7 @@ export default function Home() {
               </p>
               {/* <h3 className="text-5xl font-thin">Valentine's Day</h3> */}
               <Link
-                to="/product"
+                to="/products"
                 className="max-w-max underline underline-offset-4 text-sm mt-5"
               >
                 Shop Now
