@@ -177,6 +177,7 @@ export default function Checkout() {
             data
           );
           if (result.status === 200) {
+            await fetchCart();
             navigate("/success");
           }
         } catch (error) {

@@ -13,7 +13,12 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const { user, isLoggedIn } = useAuth();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([
+    {
+      product: { name: "" },
+      quantity: 1,
+    },
+  ]);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0);

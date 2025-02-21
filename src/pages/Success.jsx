@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import { motion } from "framer-motion";
 import Icon from "../components/ui/Icon";
 import { Link } from "react-router-dom";
-import CTAButton from "../components/ui/CTAButton";
+import { useCart } from "../contexts/CartContext";
 
 export default function Success() {
+  const { clearCart } = useCart();
+
+  useEffect(() => {
+    clearCart();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
