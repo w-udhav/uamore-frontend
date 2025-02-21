@@ -114,12 +114,12 @@ export default function InstagramPost() {
             href={item.url}
             target="_blank"
             key={index}
-            className="relative w-full min-h-[28rem] max-h-[28rem] h-full overflow-hidden"
+            className="relative w-full min-h-[35rem] max-h-[35rem] h-full overflow-hidden"
           >
             <img
               src={item.image}
               alt="uamore - instagram"
-              className="w-full min-h-[28rem] max-h-[28rem] h-full object-cover"
+              className="w-full min-h-[35rem] max-h-[35rem] h-full object-cover"
             />
             <div className="absolute top-0 left-0 right-0 w-full h-full hover:opacity-100 opacity-0 flex justify-center items-center bg-black/40">
               <div className="text-white text-center">
