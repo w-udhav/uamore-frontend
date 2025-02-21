@@ -9,7 +9,7 @@ export default function CTAButton({
 }) {
   return (
     <Link
-      to="/"
+      to={to ?? "/"}
       className={
         "min-w-60 p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out" +
         " " +

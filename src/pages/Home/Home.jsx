@@ -95,6 +95,7 @@ export default function Home() {
         <div className="max-h-svh h-full w-full flex items-center justify-center text-center">
           <div className="w-full flex flex-col items-center gap-28">
             <CTAButton
+              to="https://www.instagram.com/_uamore/"
               className="font-medium tracking-widest uppercase"
               type="light"
             >

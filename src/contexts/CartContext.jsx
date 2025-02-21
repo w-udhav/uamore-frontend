@@ -8,6 +8,7 @@ import React, {
 import { product } from "../data/data";
 import { useAuth } from "./AuthContext";
 import axiosInstance from "../utils/axiosInstance";
+import toast from "react-hot-toast";
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
@@ -68,7 +69,7 @@ export function CartProvider({ children }) {
   };
 
   const calculateCartValue = useMemo(() => {
-    if (cart.length === 0) return 0;
+    if (cart && cart.length === 0) return 0;
     if (isLoggedIn) {
       return total;
     } else {
@@ -92,6 +93,7 @@ export function CartProvider({ children }) {
       await fetchCart();
     } catch (error) {
       console.log("Invalid");
+      toast.error(error.message);
     }
   };
 
@@ -165,6 +167,7 @@ export function CartProvider({ children }) {
         couponDiscount,
         couponDetail,
         removeCoupon,
+        fetchCart,
       }}
     >
       {children}

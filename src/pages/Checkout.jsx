@@ -6,9 +6,10 @@ import { useAuth } from "../contexts/AuthContext";
 import PageHeaders from "../components/ui/PageHeaders";
 import axiosInstance from "../utils/axiosInstance";
 import logo from "../assets/logos/logo_black.png";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
-  const { cart, calculateCartValue, cartReciept } = useCart();
+  const { cart, calculateCartValue, cartReciept, fetchCart } = useCart();
   const { subtotal, total, couponDiscount: discount, gst } = cartReciept();
 
   const { isLoggedIn, user, getDetails, addAddress } = useAuth();
@@ -30,6 +31,11 @@ export default function Checkout() {
     pincode: user?.addresses[0]?.pincode ?? "",
     country: user?.addresses[0]?.country ?? "",
   });
+
+  useEffect(() => {
+    fetchCart();
+  }, [isLoading]);
+
   let flag = true;
   const handleAddress = async () => {
     const address = {
@@ -79,6 +85,8 @@ export default function Checkout() {
       return;
     }
 
+    setIsLoading(true);
+
     const res = await loadRazorpay();
     if (!res) {
       alert("Razorpay SDK failed to load. Check your internet connection.");
@@ -86,7 +94,6 @@ export default function Checkout() {
     }
 
     // Call backend to create an order
-    setIsLoading(true);
 
     let orderData;
     let order_id;
@@ -164,12 +171,18 @@ export default function Checkout() {
           razorpaySignature: response.razorpay_signature,
         };
 
-        const result = await axiosInstance.post(
-          "/api/v1/verify-purchase",
-          data
-        );
+        try {
+          const result = await axiosInstance.post(
+            "/api/v1/verify-purchase",
+            data
+          );
+          if (result.status === 200) {
+            navigate("/success");
+          }
+        } catch (error) {
+          toast.error("Something went wrong");
+        }
         setIsLoading(false);
-        navigate("/success");
       },
       prefill: {
         name: userDetails.name,
@@ -191,6 +204,10 @@ export default function Checkout() {
   useEffect(() => {
     getDetails();
   }, []);
+
+  if (!isLoading && cart && cart.length === 0) {
+    navigate("/cart");
+  }
 
   return (
     <MainLayout className="mt-24 ">
@@ -357,8 +374,9 @@ export default function Checkout() {
         <button
           className="w-full p-4 bg-charcoalBlack text-white hover:bg-black"
           onClick={handlePlaceOrder}
+          disabled={isLoading}
         >
-          Place Order
+          {isLoading ? "Loading..." : "Place Order"}
         </button>
       </div>
     </MainLayout>

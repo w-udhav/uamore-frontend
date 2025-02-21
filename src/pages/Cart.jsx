@@ -6,6 +6,7 @@ import { useCart } from "../contexts/CartContext";
 import CartCard from "../components/ui/CartCard";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Cart() {
   const { isLoggedIn } = useAuth();

@@ -3,16 +3,45 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import img1 from "../../../assets/instagram/1.jpg";
+import img2 from "../../../assets/instagram/2.jpg";
+import img3 from "../../../assets/instagram/3.jpg";
+import img4 from "../../../assets/instagram/4.jpg";
+import img5 from "../../../assets/instagram/4.jpg";
+import img6 from "../../../assets/instagram/4.jpg";
 
 const url =
   "https://i.pinimg.com/736x/84/b5/ab/84b5abb68afd9ffcc6005a2c08d73fb4.jpg";
+
+const instagramFeed = [
+  {
+    id: 1,
+    url: "https://www.instagram.com/reel/DGH586KSiMO/",
+    image: img1,
+  },
+  {
+    id: 2,
+    url: "https://www.instagram.com/reel/DGF_IEWSgSj/",
+    image: img2,
+  },
+  {
+    id: 3,
+    url: "https://www.instagram.com/reel/DGDQvZeJX_f/",
+    image: img3,
+  },
+  {
+    id: 4,
+    url: "https://www.instagram.com/reel/C97QQInyfJg/",
+    image: img4,
+  },
+];
 
 export default function InstagramPost() {
   var settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
@@ -23,7 +52,7 @@ export default function InstagramPost() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
           speed: 500,
@@ -80,15 +109,16 @@ export default function InstagramPost() {
   return (
     <div className="w-full max-w-screen-2xl px-3">
       <Slider {...settings}>
-        {[0, 1, 2, 3, 4, 5].map((item, index) => (
-          <Link
-            to="/"
+        {instagramFeed.map((item, index) => (
+          <a
+            href={item.url}
+            target="_blank"
             key={index}
             className="relative w-full min-h-[28rem] max-h-[28rem] h-full overflow-hidden"
           >
             <img
-              src={url}
-              alt=""
+              src={item.image}
+              alt="uamore - instagram"
               className="w-full min-h-[28rem] max-h-[28rem] h-full object-cover"
             />
             <div className="absolute top-0 left-0 right-0 w-full h-full hover:opacity-100 opacity-0 flex justify-center items-center bg-black/40">
@@ -96,7 +126,7 @@ export default function InstagramPost() {
                 <p className="max-w-max text-sm mt-5">Watch</p>
               </div>
             </div>
-          </Link>
+          </a>
         ))}
       </Slider>
     </div>
