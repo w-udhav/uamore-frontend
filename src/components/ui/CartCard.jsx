@@ -11,10 +11,10 @@ export default function CartCard({ data, handleIncrement, handleDecrement }) {
         </div>
         <div className="flex flex-col gap-2 w-full">
           <div className="text-zinc-800 font-medium">
-            {data?.product?.name || "Name"}
+            {data?.product?.name || data?.name || "Name"}
           </div>
           <div className="text-sm text-gray-500">
-            {data?.product?.subtitle || "category"}
+            {data?.product?.subtitle || data?.subtitle || "category"}
           </div>
           <div className="flex justify-between w-full">
             <div className="flex items-center gap-4 border max-w-32 w-full">
@@ -39,7 +39,9 @@ export default function CartCard({ data, handleIncrement, handleDecrement }) {
             </div>
 
             <div>
-              <div className="text-xl font-medium">₹{data?.product?.price}</div>
+              <div className="text-xl font-medium">
+                ₹{data?.product?.price || data?.price}
+              </div>
             </div>
           </div>
         </div>
