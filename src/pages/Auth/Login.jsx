@@ -40,7 +40,6 @@ export default function Login() {
     setLoading(false);
   };
 
-  console.log(verifyID);
   // Step 2: Verify OTP and Login
   const handleLogin = async (e) => {
     e.preventDefault();

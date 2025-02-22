@@ -78,7 +78,6 @@ export default function SingleProduct() {
       const res = await axiosInstance.get("/api/v1/products");
       let x = res?.data?.data;
       let prod = x.filter((item) => item?._id === id);
-      console.log("inside: ", x);
       setData(prod[0]);
       setSelectedSize(
         prod[0]?.inventory.length > 0 && prod[0]?.inventory[0]?.size
