@@ -15,6 +15,7 @@ import Signup from "./pages/Auth/Signup";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import PolicyPage from "./pages/PolicyPage";
+import ContactUs from "./pages/ContactUs";
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
           path="/shipping-policy"
           element={<PolicyPage policyKey="shippingPolicy" />}
         />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 

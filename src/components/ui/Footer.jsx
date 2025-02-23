@@ -31,8 +31,8 @@ const footerLinks = [
   {
     title: "Customer Care",
     links: [
-      { name: "Call us", link: "tel:+919588376534" },
-      { name: "Drop a mail", link: "mailto:help@uamore.com" },
+      { name: "Contact us", link: "tel:+919588376534" },
+      { name: "Write an mail", link: "mailto:help@uamore.com" },
     ],
   },
   {

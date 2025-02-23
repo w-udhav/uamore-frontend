@@ -190,9 +190,6 @@ export default function Checkout() {
         email: userDetails.email,
         contact: userDetails.phone,
       },
-      notes: {
-        address: "UAmore",
-      },
       theme: {
         color: "#61dafb",
       },
