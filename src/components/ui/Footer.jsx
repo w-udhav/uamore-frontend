@@ -109,10 +109,10 @@ export default function Footer() {
         <div className="flex-1 flex flex-col items-center text-zinc-500">
           <Logo type="black" />
         </div>
-        <p className="text-right text-sm flex-1 text-zinc-500 flex justify-end flex-wrap gap-2">
+        <p className="text-center md:text-right text-sm flex-1 text-zinc-500 flex justify-center md:justify-end flex-wrap gap-2">
           <Link to="/terms-and-conditions">Terms and Conditions</Link> |{" "}
           <Link to="/privacy-policy">Privacy Policy</Link> |{" "}
-          <Link to="/refund-policy">Refund Policy</Link> |{" "}
+          <Link to="/refund-policy">Cancellation & Refund Policy</Link> |{" "}
           <Link to="/shipping-policy">Shipping Policy</Link>
         </p>
       </div>
