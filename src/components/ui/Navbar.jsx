@@ -183,9 +183,12 @@ export default function Navbar() {
                     </p>
                   </Link>
                   <div className="flex flex-col gap-2">
-                    <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
-                      Contact us
-                    </p>
+                    <Link to="/contact-us" onClick={handleHamburger}>
+                      <p className="text-[16px] font-satoshi-medium text-charcoalBlack/50 hover:text-charcoalBlack/80">
+                        Contact us
+                      </p>
+                    </Link>
+
                     <div className="text-[15px] pl-4 text-charcoalBlack/50 font-semibold grid grid-cols-5 gap-2">
                       <div>Phone:</div>
                       <a
