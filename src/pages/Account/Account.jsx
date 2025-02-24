@@ -21,7 +21,7 @@ export default function Account() {
     },
     {
       id: 2,
-      name: "Orders",
+      name: "Orders History",
       path: `/account/orders`,
       routeName: "orders",
     },
