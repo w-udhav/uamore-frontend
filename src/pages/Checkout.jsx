@@ -116,6 +116,7 @@ export default function Checkout() {
         setIsLoading(false);
       }
     } else {
+      console.log("NotLoggedIn");
       let cartItems = [];
       cart.map((item) => {
         cartItems.push({
@@ -147,58 +148,62 @@ export default function Checkout() {
           email: userDetails?.email,
         });
       } catch (error) {
+        toast.error(
+          error.response?.data?.message?.error
+        );
         setIsLoading(false);
       }
     }
-
-    const options = {
-      key: "rzp_test_IfN2wjYveyC6WC",
-      KeySecret: "aIq3n5XdfbKxzgHNEatBt8bc",
-      amount: orderData?.data?.data?.totalPrice * 100,
-      currency: "INR",
-      name: userDetails.name,
-      description: "UAmore transaction",
-      image: { logo },
-      order_id: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
-      notes: {
-        orderId: orderData?.data?.data?._id,
-      },
-      handler: async function (response) {
-        const data = {
-          orderCreationId: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-        };
-
-        try {
-          const result = await axiosInstance.post(
-            "/api/v1/verify-purchase",
-            data
-          );
-          if (result.status === 200) {
-            await fetchCart();
-            navigate("/success");
-          }
-        } catch (error) {
-          toast.error("Something went wrong");
-        }
-        setIsLoading(false);
-      },
-      prefill: {
+     console.log(orderData);
+    if (orderData){
+      const options = {
+        key: "rzp_test_IfN2wjYveyC6WC",
+        KeySecret: "aIq3n5XdfbKxzgHNEatBt8bc",
+        amount: orderData?.data?.data?.totalPrice * 100,
+        currency: "INR",
         name: userDetails.name,
-        email: userDetails.email,
-        contact: userDetails.phone,
-      },
-      theme: {
-        color: "#61dafb",
-      },
-    };
+        description: "UAmore transaction",
+        image: { logo },
+        order_id: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
+        notes: {
+          orderId: orderData?.data?.data?._id,
+        },
+        handler: async function (response) {
+          const data = {
+            orderCreationId: orderData?.data?.data?.paymentInfo?.gatewayOrderId,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+          };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+          try {
+            const result = await axiosInstance.post(
+              "/api/v1/verify-purchase",
+              data
+            );
+            if (result.status === 200) {
+              await fetchCart();
+              navigate("/success");
+            }
+          } catch (error) {
+            toast.error("Something went wrong");
+          }
+          setIsLoading(false);
+        },
+        prefill: {
+          name: userDetails.name,
+          email: userDetails.email,
+          contact: userDetails.phone,
+        },
+        theme: {
+          color: "#61dafb",
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    }
   };
-
   useEffect(() => {
     getDetails();
   }, []);
