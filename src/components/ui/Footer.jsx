@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MainLayout from "../layout/MainLayout";
 import { Link } from "react-router-dom";
 import CTAButton from "./CTAButton";
@@ -30,10 +30,7 @@ const footerLinks = [
   },
   {
     title: "Customer Care",
-    links: [
-      { name: "Contact us", link: "tel:+919588376534" },
-      { name: "Write an mail", link: "mailto:help@uamore.com" },
-    ],
+    links: [{ name: "Contact us", link: "/contact-us" }],
   },
   {
     title: "Site Map",
@@ -47,6 +44,7 @@ const footerLinks = [
 ];
 
 export default function Footer() {
+  const [isCompleted, setIsCompleted] = useState(false);
   return (
     <MainLayout className="mt-28">
       {/* Footer top */}
@@ -65,12 +63,12 @@ export default function Footer() {
               className="w-full border-2 focus:border-black outline-none px-3 py-3  text-charcoalBlack"
               placeholder="Enter your email address"
             />
-            <CTAButton
-              className="h-14 flex justify-center items-center"
-              type="light"
+            <button
+              onClick={() => setIsCompleted(true)}
+              className="w-full p-4 px-6  font-satoshi-medium text-center transition-all ease-in-out bg-charcoalBlack text-white hover:bg-black"
             >
-              Subscribe
-            </CTAButton>
+              {isCompleted ? "Thank You!" : "Subscribe"}
+            </button>
           </div>
         </div>
         {/* Section 2 */}

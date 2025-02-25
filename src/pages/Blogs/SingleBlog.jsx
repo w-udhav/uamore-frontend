@@ -10,7 +10,9 @@ import img3 from "../../assets/products/perfume2.jpg";
 export default function SingleBlog() {
   const { id } = useParams();
   const img = [img1, img2, img3];
-  const blog = blogs.find((blog) => blog.id === parseInt(id));
+  const blog = blogs.find((blog) => blog.slug === id);
+  const blogId_x = blogs.find((b) => b.id === parseInt(blog.id));
+  const blogId = blogId_x.id;
 
   if (!blog) {
     return <div>Blog not found</div>;
@@ -28,7 +30,7 @@ export default function SingleBlog() {
         <div className="py-8 border-b flex flex-col gap-10 overflow-hidden">
           <div className="max-h-[35rem] h-full overflow-hidden border">
             <img
-              src={img[id - 1]}
+              src={img[blogId - 1]}
               className="w-full h-full object-cover object-top"
               alt="blog"
             />

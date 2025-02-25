@@ -9,7 +9,7 @@ export default function BlogDisplayCard({ data }) {
 
   return (
     <Link
-      to={`/blogs/${data.id}`}
+      to={`/blogs/${data.slug}`}
       className="w-full max-w-md overflow-hidden flex flex-col gap-3"
     >
       <div className="max-h-[17rem] min-h-[17rem] h-full w-full relative">

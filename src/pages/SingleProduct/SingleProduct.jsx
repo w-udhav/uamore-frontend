@@ -141,7 +141,7 @@ export default function SingleProduct() {
           <img src={mainImg} alt="" />
         </div>
 
-        <div className="lg:hidden max-w-screen-xl w-full h-[70vh] md:h-svh overflow-hidden ">
+        <div className="lg:hidden max-w-screen-xl w-full overflow-hidden ">
           <Slider {...sliderSettings}>
             {productImages.map((image, index) => (
               <div

@@ -150,9 +150,9 @@ const blogs = [
   {
     id: 1,
     title:
-      "The Art of Luxury Perfumery: How a Signature Scent Defines Your Personality and Style ",
+      "The Art of Luxury Perfumery: How a Signature Scent Defines Your Personality and Style",
     image: "perfume1.jpg",
-    author: "Kartik",
+    slug: "the-art-of-luxury-perfumery-signature-scent-personality-style",
     content: [
       `Luxury is not just about what you wear; it is that which lingers long after you are gone. The delicate stroke of silk around your skin, the sheen of the snugly-fitted suit, the quiet authority of a meticulously engineered timepiece—each of these elements defines sophistication. But the truest luxury is invisible. It is the lingering trail of a luxury perfume bottle with exquisite craftsmanship, an olfactory signature that tells your story without words. `,
       `At Uamore, we believe that scent isn't merely the updated version of luxury; it is a revelation about your existence. The right scent doesn't merely follow your capacities-it brands it, indelible by years. Luxury fragrances are not merely accessories; they are statements, crafted for those who understand the power of refinement and distinction. `,
@@ -219,7 +219,7 @@ const blogs = [
     title:
       "Perfume Etiquette: How to Apply, Store & Layer Your Fragrance Right",
     image: "perfume2.jpg",
-    author: "Kartik",
+    slug: "perfume-etiquette-apply-store-layer-fragrance",
     content: [
       `A high-end perfume is the invisible jewel that leaves a trail around it forever after you pass. At Uamore, we think about a premium perfume not just as a scent, but also as an art expression, personality reflection, and a ceremonial attainment of elegance. Yet, despite one is as good as it gets in the perfume world, perfume application, storage, and layering might be the final factor that contributes to its fragrance potency after the scent is blended. `,
       `Here we will dive into perfume etiquette-the art of how to apply, how to store, and how to layer your perfume, all uniquely stylized to add to your scent's statement. `,
@@ -369,7 +369,7 @@ const blogs = [
     id: 3,
     title: "House of UAmore",
     image: "",
-    author: "Kartik",
+    slug: "house-of-uamore",
     content: [
       `A luxury perfume is not just a high-end scent; it is a statement; a lingering impression that speaks before words do. At UAmore, every premium fragrance is designed to embody elegance, evoke deep emotions, and leave an unforgettable mark. Rooted in India's rich high-end perfumery heritage and elevated by cutting-edge techniques, each Uamore fragrance is the epitome of opulence, passion, and refinement. `,
       `<br/>`,

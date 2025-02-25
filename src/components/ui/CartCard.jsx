@@ -9,14 +9,14 @@ export default function CartCard({ data, handleIncrement, handleDecrement }) {
         <div className="w-52 h-32 bg-zinc-50 rounded-md">
           <img src={img} alt="perfume" className="w-full h-full object-cover" />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col w-full">
           <div className="text-zinc-800 font-medium">
             {data?.product?.name || data?.name || "Name"}
           </div>
           <div className="text-sm text-gray-500">
             {data?.product?.subtitle || data?.subtitle || "category"}
           </div>
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between w-full mt-5">
             <div className="flex items-center gap-4 border max-w-32 w-full">
               <button
                 onClick={() => handleDecrement(data)}

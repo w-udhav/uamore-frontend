@@ -35,7 +35,7 @@ export default function Home() {
                 A premium scent means much more than just a fragrance – it is an
                 experience, an emotion and sophistication woven into the air
               </p> */}
-              <h3 className="text-5xl font-thin">UAmore</h3>
+              <h1 className="text-5xl font-thin">UAmore</h1>
               <Link
                 to="/products"
                 className="max-w-max underline underline-offset-4 text-sm mt-3"
@@ -47,11 +47,11 @@ export default function Home() {
         </MainLayout>
       </div>
 
-      <div className="max-w-screen-2xl w-full mx-auto">
+      <div className="max-w-screen-2xl min-h-screen w-full mx-auto flex items-center">
         <div className="relative max-h-svh md:max-h-[80svh] min-h-svh md:min-h-[80svh] py-20 h-full w-full">
           <div className="absolute top-0 left-0 right-0 bottom-0">
             <video
-              className="w-full h-full object-cover "
+              className="w-full h-full object-cover"
               src={perfumeVd}
               autoPlay
               loop={true}
