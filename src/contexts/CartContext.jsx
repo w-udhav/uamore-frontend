@@ -51,27 +51,53 @@ export function CartProvider({ children }) {
         });
         if (res.status !== 200) return;
         await fetchCart();
+        setCart((prevCart) => {
+          const existingItemIndex = prevCart.findIndex(
+            (cartItem) => cartItem._id === item._id
+          );
+
+          if (existingItemIndex !== -1) {
+            return prevCart.map((cartItem, index) =>
+              index === existingItemIndex
+                ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                : cartItem
+            );
+          }
+
+          return [...prevCart, { ...item, quantity: 1 }];
+        });
         return;
       } catch (error) {
         toast.error("Something went wrong");
       }
-    }
+    } else {
+      try {
+        const checkInventory = ""; // api call
+        if (checkInventory.inventoryStatus === "outOfStock") {
+          toast.error("Out of stock");
+          return;
+        }
+        if (checkInventory.inventoryStatus === "instock") {
+          setCart((prevCart) => {
+            const existingItemIndex = prevCart.findIndex(
+              (cartItem) => cartItem._id === item._id
+            );
 
-    setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex(
-        (cartItem) => cartItem._id === item._id
-      );
+            if (existingItemIndex !== -1) {
+              return prevCart.map((cartItem, index) =>
+                index === existingItemIndex
+                  ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                  : cartItem
+              );
+            }
 
-      if (existingItemIndex !== -1) {
-        return prevCart.map((cartItem, index) =>
-          index === existingItemIndex
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
+            return [...prevCart, { ...item, quantity: 1 }];
+          });
+        }
+      } catch (error) {
+        toast.error("Something went wrong");
       }
-
-      return [...prevCart, { ...item, quantity: 1 }];
-    });
+    }
   };
 
   const calculateCartValue = useMemo(() => {
@@ -129,11 +155,17 @@ export function CartProvider({ children }) {
 
   const updateCart = async (id, quantity) => {
     if (isLoggedIn) {
-      const res = await axiosInstance.post("/api/v1/cart/change", {
-        productId: id,
-        flag: quantity === 1 ? 1 : 0,
-      });
-      if (res.status !== 200) return;
+      try {
+        const res = await axiosInstance.post("/api/v1/cart/change", {
+          productId: id,
+          flag: quantity === 1 ? 1 : 0,
+        });
+      } catch (error) {
+        if (error.status === 400) {
+          console.log(error);
+          toast.error(error?.response?.data?.message);
+        }
+      }
       await fetchCart();
     }
 

@@ -16,6 +16,7 @@ import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import PolicyPage from "./pages/PolicyPage";
 import ContactUs from "./pages/ContactUs";
+import SingleBlog2 from "./pages/Blogs/SingleBlog2";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/blogs" element={<AllBlogs />} />
         <Route path="/blogs/:id" element={<SingleBlog />} />
+        <Route path="/blogs/u/:id/:slug" element={<SingleBlog2 />} />
         <Route path="/account/*" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
