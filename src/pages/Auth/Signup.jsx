@@ -24,6 +24,13 @@ export default function Signup() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Remove country code from phone number
+    if (name === "phone") {
+      const phoneWithoutCountryCode = value.replace(/^\+91|^0/, "");
+      setFormData((prev) => ({ ...prev, [name]: phoneWithoutCountryCode }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -31,6 +38,7 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
       const res = await axiosInstance.post("/api/v1/user/new", {
         name: formData.name,
@@ -183,7 +191,6 @@ export default function Signup() {
                   type="text"
                   name="phone"
                   value={formData.phone}
-                  disabled
                   className="w-full border-2 focus:border-black outline-none px-3 py-3"
                 />
               </div>

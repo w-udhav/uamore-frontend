@@ -20,6 +20,11 @@ export default function Login() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "phone") {
+      const phoneWithoutCountryCode = value.replace(/^\+91|^0/, "");
+      setFormData((prev) => ({ ...prev, [name]: phoneWithoutCountryCode }));
+      return;
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
