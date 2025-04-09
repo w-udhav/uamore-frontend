@@ -11,7 +11,7 @@ export default function ProductDisplayCard({ data = {} }) {
     >
       <div className="max-h-[26rem] h-full w-full relative">
         <img
-          src={BOX}
+          src={data?.displayImage ?? BOX}
           className="w-full h-full object-cover hover:scale-105 transition-transform"
           alt="perfume"
         />
