@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://e-comm-backened.onrender.com",
+  baseURL: "https://api.uamore.com", // Replace with your API base URL
 });
 
 axiosInstance.interceptors.request.use(

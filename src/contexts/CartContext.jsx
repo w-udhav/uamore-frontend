@@ -72,29 +72,46 @@ export function CartProvider({ children }) {
       }
     } else {
       try {
-        const checkInventory = ""; // api call
-        if (checkInventory.inventoryStatus === "outOfStock") {
+        const checkInventory = await axiosInstance.get(
+          `/api/v1/productsInv/${item._id}`
+        );
+
+        const inventory = checkInventory?.data?.data?.inventory;
+        if (!inventory || typeof inventory.items !== "number") {
+          toast.error("Inventory data is invalid");
+          return;
+        }
+
+        if (inventory.items === 0) {
           toast.error("Out of stock");
           return;
         }
-        if (checkInventory.inventoryStatus === "instock") {
+
+        if (inventory.items >= 1) {
           setCart((prevCart) => {
             const existingItemIndex = prevCart.findIndex(
               (cartItem) => cartItem._id === item._id
             );
-
             if (existingItemIndex !== -1) {
-              return prevCart.map((cartItem, index) =>
-                index === existingItemIndex
-                  ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                  : cartItem
-              );
+              const updatedCart = prevCart.map((cartItem, index) => {
+                if (index === existingItemIndex) {
+                  if (cartItem.quantity >= 6) {
+                    toast.error("Max limit reached (6 items)");
+                    return cartItem;
+                  }
+                  return { ...cartItem, quantity: cartItem.quantity + 1 };
+                }
+                return cartItem;
+              });
+              return updatedCart;
             }
+
 
             return [...prevCart, { ...item, quantity: 1 }];
           });
         }
       } catch (error) {
+        console.error("Inventory check failed:", error);
         toast.error("Something went wrong");
       }
     }
@@ -173,6 +190,10 @@ export function CartProvider({ children }) {
       .map((item) => {
         if (item?.product?._id === id) {
           const newQuantity = item.quantity + quantity;
+          if (newQuantity > 6) {
+            toast.error("Max limit reached (6 items)");
+            return item;
+          }
           if (newQuantity > 0) {
             return { ...item, quantity: newQuantity };
           }

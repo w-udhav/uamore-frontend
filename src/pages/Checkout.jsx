@@ -148,17 +148,15 @@ export default function Checkout() {
           email: userDetails?.email,
         });
       } catch (error) {
-        toast.error(
-          error.response?.data?.message?.error
-        );
+        toast.error(error.response?.data?.message?.error);
         setIsLoading(false);
       }
     }
-     console.log(orderData);
-    if (orderData){
+    console.log(orderData);
+    if (orderData) {
       const options = {
-        key: "rzp_test_IfN2wjYveyC6WC",
-        KeySecret: "aIq3n5XdfbKxzgHNEatBt8bc",
+        key: "rzp_live_HX4M7jBWggEBCi",
+        KeySecret: "sqZ7qzeMB1fyyA1sGGRo9nqF",
         amount: orderData?.data?.data?.totalPrice * 100,
         currency: "INR",
         name: userDetails.name,

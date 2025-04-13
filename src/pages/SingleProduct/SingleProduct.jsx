@@ -16,6 +16,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { Link, useParams } from "react-router-dom";
 import Logo from "../../components/ui/Logo";
 import { useAuth } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const tabs = ["description", "ingredients", "how to use"];
 
@@ -39,8 +40,8 @@ export default function SingleProduct() {
 
   const handleIncrement = () => {
     const totalQuantity = data?.inventory[0]?.items;
-    if (cartItem?.quantity === totalQuantity) {
-      setError("Maximum quantity reached");
+    if (cartItem?.quantity === totalQuantity || cartItem?.quantity === 6) {
+      toast.error("Maximum quantity reached");
       return;
     }
     updateCart(cartItem?.product?._id, 1);
