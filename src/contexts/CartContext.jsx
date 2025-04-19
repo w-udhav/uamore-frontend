@@ -51,24 +51,13 @@ export function CartProvider({ children }) {
         });
         if (res.status !== 200) return;
         await fetchCart();
-        setCart((prevCart) => {
-          const existingItemIndex = prevCart.findIndex(
-            (cartItem) => cartItem._id === item._id
-          );
-
-          if (existingItemIndex !== -1) {
-            return prevCart.map((cartItem, index) =>
-              index === existingItemIndex
-                ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                : cartItem
-            );
-          }
-
-          return [...prevCart, { ...item, quantity: 1 }];
-        });
-        return;
+        return; // Remove redundant local cart update logic for logged-in users
       } catch (error) {
-        toast.error("Something went wrong");
+        if (error.response?.status === 401) {
+          toast.error("Session expired. Please log in again.");
+        } else {
+          toast.error("Something went wrong");
+        }
       }
     } else {
       try {
@@ -105,7 +94,6 @@ export function CartProvider({ children }) {
               });
               return updatedCart;
             }
-
 
             return [...prevCart, { ...item, quantity: 1 }];
           });

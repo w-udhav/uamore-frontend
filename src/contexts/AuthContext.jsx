@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -18,11 +19,42 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
   useEffect(() => {
-    if (user && token) {
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", token);
+    const existingUser = localStorage.getItem("user");
+    const existingToken = localStorage.getItem("token");
+    if (existingUser) {
+      setUser(JSON.parse(existingUser));
     }
-  }, [user, token]);
+    if (existingToken) {
+      setToken(existingToken);
+    }
+    if (existingUser && existingToken) {
+      setIsLoggedIn(true);
+    } else {
+      logout();
+      setIsLoggedIn(false);
+    }
+    if (isLoggedIn) {
+      getDetails();
+    }
+
+    // Intercept axios requests to handle token expiration
+    const interceptor = axiosInstance.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        if (error.response?.status === 401) {
+          // Token expired, log the user out
+          toast.error("Session expired. Please log in again.");
+          logout();
+          navigate("/login");
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axiosInstance.interceptors.response.eject(interceptor);
+    };
+  }, []);
 
   const getDetails = async () => {
     if (isLoggedIn) {
@@ -88,6 +120,7 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(false);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (

@@ -43,6 +43,10 @@ export default function Cart() {
     } catch (error) {}
     setIsCouponLoading(false);
   };
+
+  console.log("cart", cart);
+  console.log("cartReciept", cartReciept());
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

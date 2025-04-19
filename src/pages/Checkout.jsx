@@ -240,9 +240,15 @@ export default function Checkout() {
             type="number"
             placeholder="Phone Number"
             value={userDetails.phone}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, phone: e.target.value })
-            }
+            onChange={(e) => {
+              const phone = e.target.value;
+              if (
+                phone.length <= 10 &&
+                (phone.length === 0 || phone[0] !== "0")
+              ) {
+                setUserDetails({ ...userDetails, phone });
+              }
+            }}
             className="w-full border-2 px-3 py-2 my-2 h-11"
             required
           />

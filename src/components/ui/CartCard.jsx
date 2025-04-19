@@ -14,7 +14,7 @@ export default function CartCard({ data, handleIncrement, handleDecrement }) {
             {data?.product?.name || data?.name || "Name"}
           </div>
           <div className="text-sm text-gray-500">
-            {data?.product?.subtitle || data?.subtitle || "category"}
+            {data?.product?.title || "Perfume"}
           </div>
           <div className="flex justify-between w-full mt-5">
             <div className="flex items-center gap-4 border max-w-32 w-full">
