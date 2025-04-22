@@ -120,7 +120,6 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(false);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    navigate("/login");
   };
 
   return (

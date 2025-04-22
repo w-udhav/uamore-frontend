@@ -116,27 +116,27 @@ const product = {
     <h6><strong>Sillage:</strong> Intense, commanding, and irresistibly bold.</h6>
     <h6><strong>Longevity:</strong> 10–12 hours of pure luxury, from dusk till dawn.</h6>`,
     howToUse: `
-    <article>
-                        To enhance the longevity and sillage of your Uamore
-                        fragrance:
-                      </article>
-                      <article>
-                        Apply on Pulse Points – Lightly spray on your wrists,
-                        neck, and behind your ears for the best diffusion.
-                      </article>
-                      <article>
-                        Layer for Depth – Mist it onto your clothing and hair
-                        for a more enduring scent.
-                      </article>
-                      <article>
-                        Avoid Rubbing – Allow the fragrance to settle naturally
-                        on your skin to keep its original composition intact.
-                      </article>
-                      <article>
-                        Store with Care – Keep your fragrance in a cool, dry
-                        area, away from direct sunlight, to maintain its
-                        essence.
-                      </article>`,
+<article>
+  To enhance the longevity and sillage of your Uamore
+  fragrance:
+</article>
+<article>
+  Apply on Pulse Points – Lightly spray on your wrists,
+  neck, and behind your ears for the best diffusion.
+</article>
+<article>
+  Layer for Depth – Mist it onto your clothing and hair
+  for a more enduring scent.
+</article>
+<article>
+  Avoid Rubbing – Allow the fragrance to settle naturally
+  on your skin to keep its original composition intact.
+</article>
+<article>
+  Store with Care – Keep your fragrance in a cool, dry
+  area, away from direct sunlight, to maintain its
+  essence.
+</article>`,
   },
   images: [
     "../assets/singleProduct/image1.jpg",

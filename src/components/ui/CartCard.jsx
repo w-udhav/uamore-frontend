@@ -7,7 +7,11 @@ export default function CartCard({ data, handleIncrement, handleDecrement }) {
     <div className="border-b py-1">
       <div className="flex items-start gap-4 p-2">
         <div className="w-52 h-32 bg-zinc-50 rounded-md">
-          <img src={img} alt="perfume" className="w-full h-full object-cover" />
+          <img
+            src={data?.displayImage || img}
+            alt="perfume"
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="flex flex-col w-full">
           <div className="text-zinc-800 font-medium">

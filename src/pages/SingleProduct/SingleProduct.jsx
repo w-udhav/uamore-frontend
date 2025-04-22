@@ -76,13 +76,10 @@ export default function SingleProduct() {
   const fetch = async () => {
     setIsLoading(true);
     try {
-      const res = await axiosInstance.get("/api/v1/products");
+      const res = await axiosInstance.get("/api/v1/product/" + id);
       let x = res?.data?.data;
-      let prod = x.filter((item) => item?._id === id);
-      setData(prod[0]);
-      setSelectedSize(
-        prod[0]?.inventory.length > 0 && prod[0]?.inventory[0]?.size
-      );
+      setData(x);
+      setSelectedSize(x?.inventory.length > 0 && x?.inventory[0]?.size);
       if (isLoggedIn) {
         setCartItem(cart.find((item) => item?.product?._id === data?._id));
       } else {
@@ -136,15 +133,20 @@ export default function SingleProduct() {
     >
       <div className="col-span-6 ">
         <div className="hidden lg:grid grid-cols-2 gap-1">
-          <img src={img1} className="col-span-2" alt="" />
-          <img src={img2} alt="" />
-          <img src={img3} alt="" />
-          <img src={mainImg} alt="" />
+          {data?.images &&
+            data?.images.map((image, index) => (
+              <img
+                src={image}
+                key={index}
+                className={index === 0 ? "col-span-2" : ""}
+                alt=""
+              />
+            ))}
         </div>
 
         <div className="lg:hidden max-w-screen-xl w-full overflow-hidden ">
           <Slider {...sliderSettings}>
-            {productImages.map((image, index) => (
+            {data?.images.map((image, index) => (
               <div
                 className="w-full md:max-h-[95svh] md:min-h-[95svh] max-h-[65vh] min-h-[65vh] h-full overflow-hidden relative"
                 key={index}
@@ -166,9 +168,9 @@ export default function SingleProduct() {
           <div className="w-full flex flex-col items-start md:items-center md:text-center gap-16">
             {/* Header */}
             <div className="flex flex-col gap-5">
-              <h3 className="">{product.title}</h3>
+              <h3 className="">{data?.title}</h3>
               <p className="text-charcoalBlack/60 text-sm font-satoshi-medium">
-                {product.subtitle}
+                {data.subtitle || product.subtitle}
               </p>
             </div>
             <div />
@@ -269,14 +271,14 @@ export default function SingleProduct() {
                 <div className="text-left text-lg">
                   {selectedTab === "description" && (
                     <div
-                      dangerouslySetInnerHTML={{ __html: product?.about?.desc }}
+                      dangerouslySetInnerHTML={{ __html: data?.about?.desc }}
                     />
                   )}
 
                   {selectedTab === "ingredients" && (
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: product?.about?.ingredients,
+                        __html: data?.about?.ingredients,
                       }}
                     />
                   )}
@@ -284,7 +286,7 @@ export default function SingleProduct() {
                     <div
                       className="flex flex-col gap-3 leading-snug"
                       dangerouslySetInnerHTML={{
-                        __html: product?.about?.howToUse,
+                        __html: data?.about?.howToUse,
                       }}
                     />
                   )}
