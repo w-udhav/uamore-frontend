@@ -77,10 +77,13 @@ export default function SingleProduct() {
     setIsLoading(true);
     try {
       const res = await axiosInstance.get("/api/v1/product/" + id);
+      console.log("Single product response: ", res);
       let x = res?.data?.data;
       setData(x);
       setSelectedSize(x?.inventory.length > 0 && x?.inventory[0]?.size);
       if (isLoggedIn) {
+
+        
         setCartItem(cart.find((item) => item?.product?._id === data?._id));
       } else {
         setCartItem(cart.find((item) => item?._id === data?._id));

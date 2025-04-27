@@ -62,7 +62,7 @@ export function CartProvider({ children }) {
     } else {
       try {
         const checkInventory = await axiosInstance.get(
-          `/api/v1/productsInv/${item.id}`
+          `/api/v1/productsInv/${item._id}`
         );
 
         const inventory = checkInventory?.data?.data?.inventory;
